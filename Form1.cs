@@ -16,5 +16,10 @@ namespace RecipeOrganizer
         {
             InitializeComponent();
         }
+
+        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        {
+            Console.Write(e.ScrollOrientation.);
+        }
     }
 }
