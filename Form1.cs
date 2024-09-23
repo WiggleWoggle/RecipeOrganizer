@@ -19,7 +19,8 @@ namespace RecipeOrganizer
 
         private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
-            
+            int change = hScrollBar1.Value;
+  
         }
     }
 }
