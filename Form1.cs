@@ -19,7 +19,7 @@ namespace RecipeOrganizer
 
         private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
-            Console.Write(e.ScrollOrientation.);
+            Console.Write("\n Old: " + e.OldValue + " New: " + e.NewValue);
         }
     }
 }

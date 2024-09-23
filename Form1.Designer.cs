@@ -31,37 +31,37 @@
             this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Home = new System.Windows.Forms.TabPage();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.Recipe1 = new System.Windows.Forms.TabPage();
-            this.Recipe2 = new System.Windows.Forms.TabPage();
-            this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.Recipe1 = new System.Windows.Forms.TabPage();
+            this.Recipe2 = new System.Windows.Forms.TabPage();
+            this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.Home.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // vScrollBar1
             // 
-            this.vScrollBar1.Location = new System.Drawing.Point(623, 19);
+            this.vScrollBar1.Location = new System.Drawing.Point(623, 21);
             this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(19, 666);
+            this.vScrollBar1.Size = new System.Drawing.Size(19, 664);
             this.vScrollBar1.TabIndex = 2;
             this.vScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar1_Scroll);
             // 
@@ -91,119 +91,6 @@
             this.Home.Size = new System.Drawing.Size(617, 662);
             this.Home.TabIndex = 1;
             this.Home.Text = "Home";
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.SlateGray;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.panel2);
-            this.panel1.Location = new System.Drawing.Point(57, 74);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(501, 91);
-            this.panel1.TabIndex = 6;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.Snow;
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(409, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(87, 83);
-            this.panel2.TabIndex = 7;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(97, 22);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(461, 20);
-            this.textBox2.TabIndex = 5;
-            this.textBox2.Text = "...";
-            // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.textBox1.Location = new System.Drawing.Point(57, 22);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(41, 20);
-            this.textBox1.TabIndex = 4;
-            this.textBox1.Text = "Search";
-            // 
-            // Recipe1
-            // 
-            this.Recipe1.Location = new System.Drawing.Point(4, 22);
-            this.Recipe1.Name = "Recipe1";
-            this.Recipe1.Padding = new System.Windows.Forms.Padding(3);
-            this.Recipe1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Recipe1.Size = new System.Drawing.Size(617, 662);
-            this.Recipe1.TabIndex = 0;
-            this.Recipe1.Text = "Recipe 1";
-            this.Recipe1.UseVisualStyleBackColor = true;
-            // 
-            // Recipe2
-            // 
-            this.Recipe2.Location = new System.Drawing.Point(4, 22);
-            this.Recipe2.Name = "Recipe2";
-            this.Recipe2.Size = new System.Drawing.Size(617, 662);
-            this.Recipe2.TabIndex = 2;
-            this.Recipe2.Text = "Recipe 2";
-            this.Recipe2.UseVisualStyleBackColor = true;
-            // 
-            // hScrollBar1
-            // 
-            this.hScrollBar1.Location = new System.Drawing.Point(644, 131);
-            this.hScrollBar1.Name = "hScrollBar1";
-            this.hScrollBar1.Size = new System.Drawing.Size(80, 17);
-            this.hScrollBar1.TabIndex = 4;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 32);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Image";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label2.Location = new System.Drawing.Point(4, 4);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(105, 20);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Recipe Name";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 73);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(88, 13);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Tags: T1, T2, T3";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 35);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 13);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Description";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(54, 58);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(45, 13);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Results:";
             // 
             // panel3
             // 
@@ -264,6 +151,119 @@
             this.label9.TabIndex = 0;
             this.label9.Text = "Image";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(54, 58);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(45, 13);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Results:";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.SlateGray;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Location = new System.Drawing.Point(57, 74);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(501, 91);
+            this.panel1.TabIndex = 6;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 35);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(60, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Description";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(5, 73);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(88, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Tags: T1, T2, T3";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label2.Location = new System.Drawing.Point(4, 4);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(105, 20);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Recipe Name";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.Snow;
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Location = new System.Drawing.Point(409, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(87, 83);
+            this.panel2.TabIndex = 7;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(24, 32);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(36, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Image";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(97, 22);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(461, 20);
+            this.textBox2.TabIndex = 5;
+            this.textBox2.Text = "...";
+            // 
+            // Recipe1
+            // 
+            this.Recipe1.Location = new System.Drawing.Point(4, 22);
+            this.Recipe1.Name = "Recipe1";
+            this.Recipe1.Padding = new System.Windows.Forms.Padding(3);
+            this.Recipe1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Recipe1.Size = new System.Drawing.Size(617, 662);
+            this.Recipe1.TabIndex = 0;
+            this.Recipe1.Text = "Recipe 1";
+            this.Recipe1.UseVisualStyleBackColor = true;
+            // 
+            // Recipe2
+            // 
+            this.Recipe2.Location = new System.Drawing.Point(4, 22);
+            this.Recipe2.Name = "Recipe2";
+            this.Recipe2.Size = new System.Drawing.Size(617, 662);
+            this.Recipe2.TabIndex = 2;
+            this.Recipe2.Text = "Recipe 2";
+            this.Recipe2.UseVisualStyleBackColor = true;
+            // 
+            // hScrollBar1
+            // 
+            this.hScrollBar1.Location = new System.Drawing.Point(644, 131);
+            this.hScrollBar1.Name = "hScrollBar1";
+            this.hScrollBar1.Size = new System.Drawing.Size(80, 17);
+            this.hScrollBar1.TabIndex = 4;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.textBox1.Location = new System.Drawing.Point(57, 22);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(41, 20);
+            this.textBox1.TabIndex = 4;
+            this.textBox1.Text = "Search";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -278,14 +278,14 @@
             this.tabControl1.ResumeLayout(false);
             this.Home.ResumeLayout(false);
             this.Home.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -296,7 +296,6 @@
         private System.Windows.Forms.TabPage Home;
         private System.Windows.Forms.TabPage Recipe1;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.HScrollBar hScrollBar1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TabPage Recipe2;
@@ -312,6 +311,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
