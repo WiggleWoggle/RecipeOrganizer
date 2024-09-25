@@ -31,10 +31,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Home = new System.Windows.Forms.TabPage();
             this.RecipeLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.DefaultRecipePanel = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
-            this.RecipeDescription = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
             this.ResultsLabel = new System.Windows.Forms.Label();
             this.SearchInputText = new System.Windows.Forms.TextBox();
             this.SearchLabel = new System.Windows.Forms.TextBox();
@@ -44,8 +40,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.Home.SuspendLayout();
-            this.RecipeLayoutPanel.SuspendLayout();
-            this.DefaultRecipePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -78,52 +72,10 @@
             // RecipeLayoutPanel
             // 
             this.RecipeLayoutPanel.AutoScroll = true;
-            this.RecipeLayoutPanel.Controls.Add(this.DefaultRecipePanel);
             this.RecipeLayoutPanel.Location = new System.Drawing.Point(53, 74);
             this.RecipeLayoutPanel.Name = "RecipeLayoutPanel";
             this.RecipeLayoutPanel.Size = new System.Drawing.Size(564, 588);
             this.RecipeLayoutPanel.TabIndex = 8;
-            // 
-            // DefaultRecipePanel
-            // 
-            this.DefaultRecipePanel.BackColor = System.Drawing.Color.SlateGray;
-            this.DefaultRecipePanel.Controls.Add(this.label13);
-            this.DefaultRecipePanel.Controls.Add(this.RecipeDescription);
-            this.DefaultRecipePanel.Controls.Add(this.label15);
-            this.DefaultRecipePanel.Location = new System.Drawing.Point(3, 3);
-            this.DefaultRecipePanel.Name = "DefaultRecipePanel";
-            this.DefaultRecipePanel.Size = new System.Drawing.Size(502, 129);
-            this.DefaultRecipePanel.TabIndex = 14;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            this.label13.Location = new System.Drawing.Point(3, 110);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(64, 13);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "Recipe Tags";
-            // 
-            // RecipeDescription
-            // 
-            this.RecipeDescription.AutoSize = true;
-            this.RecipeDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
-            this.RecipeDescription.Location = new System.Drawing.Point(5, 37);
-            this.RecipeDescription.Name = "RecipeDescription";
-            this.RecipeDescription.Size = new System.Drawing.Size(122, 16);
-            this.RecipeDescription.TabIndex = 1;
-            this.RecipeDescription.Text = "Recipe Description";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.label15.Location = new System.Drawing.Point(4, 4);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(126, 24);
-            this.label15.TabIndex = 0;
-            this.label15.Text = "Recipe Name";
             // 
             // ResultsLabel
             // 
@@ -202,9 +154,6 @@
             this.tabControl1.ResumeLayout(false);
             this.Home.ResumeLayout(false);
             this.Home.PerformLayout();
-            this.RecipeLayoutPanel.ResumeLayout(false);
-            this.DefaultRecipePanel.ResumeLayout(false);
-            this.DefaultRecipePanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -220,10 +169,6 @@
         private System.Windows.Forms.Label ResultsLabel;
         private System.Windows.Forms.TextBox SearchLabel;
         private System.Windows.Forms.FlowLayoutPanel RecipeLayoutPanel;
-        private System.Windows.Forms.Panel DefaultRecipePanel;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label RecipeDescription;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button button1;
     }
 }
