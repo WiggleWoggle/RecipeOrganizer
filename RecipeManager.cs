@@ -9,7 +9,7 @@ namespace RecipeOrganizer
     internal class RecipeManager
     {
 
-        private static List<Recipe> recipes = new List<Recipe>();
+        public static List<Recipe> recipes = new List<Recipe>();
 
         public static void addRecipe(Recipe recipe)
         {

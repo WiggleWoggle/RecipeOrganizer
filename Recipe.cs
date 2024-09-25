@@ -57,6 +57,12 @@ namespace RecipeOrganizer
             }
         }
 
+        public void setTags(List<String> tags)
+        {
+
+            recipeTags = tags;
+        }
+
         public void removeTag(String tag)
         {
 

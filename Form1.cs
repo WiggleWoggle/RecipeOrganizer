@@ -43,7 +43,10 @@ namespace RecipeOrganizer
             newPanel.BackColor = Color.SlateGray;
             newPanel.Size = new Size(502, 129);
 
-            newPanel.Name = "Recipe-";
+            //for setting object name in solution explorer
+            //String recipeLocation = RecipeManager.recipes
+
+            newPanel.Name = "Recipe-" ;
 
             newPanel.Controls.Add(createTitle(recipe));
             newPanel.Controls.Add(createDescription(recipe));
@@ -60,6 +63,8 @@ namespace RecipeOrganizer
             label.Font = new Font("Microsoft Sans Serif", 14);
             label.Size = new Size(300, 24);
 
+            //need to set object name for solution explorer
+
             return label;
         }
 
@@ -71,6 +76,8 @@ namespace RecipeOrganizer
             label.Font = new Font("Microsoft Sans Serif", 9);
             label.Size = new Size(300, 24);
             label.Location = new Point(2, 25);
+
+            //need to set object name for solution explorer
 
             return label;
         }
