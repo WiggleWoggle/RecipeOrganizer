@@ -37,5 +37,5 @@ namespace RecipeOrganizer
 
             return newPanel;
         }
-    }
+    }       
 }
