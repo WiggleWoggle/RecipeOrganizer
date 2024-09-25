@@ -17,10 +17,25 @@ namespace RecipeOrganizer
             InitializeComponent();
         }
 
-        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            int change = hScrollBar1.Value;
-  
+            Console.Write("TEST");
+
+            RecipeLayoutPanel.Controls.Add(createPanel());
+        }
+
+        private Panel createPanel()
+        {
+
+            Panel newPanel = new Panel();
+            newPanel.BackColor = Color.SlateGray;
+            newPanel.Size = new Size(502, 129);
+            newPanel.Name = "Recipe-";
+
+            Label label = new Label();
+            label.Text = "TEST";
+
+            return newPanel;
         }
     }
 }
