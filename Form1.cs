@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace RecipeOrganizer
         public Form1()
         {
             InitializeComponent();
+            SQLserver();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,5 +39,38 @@ namespace RecipeOrganizer
 
             return newPanel;
         }
-    }       
+
+        private void label15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SQLserver()
+        {
+            string connectionString = @"Server=(localdb)\MSSQLLocalDB;Integrated Security=true";
+
+            string createDbQuery = "CREATE DATABASE recipies";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand(createDbQuery, conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                        System.Diagnostics.Debug.WriteLine("LocalDB database 'recipie' created successfully");
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("An error occurred: " + ex.Message);
+            }
+        }
+
+    }
+
 }
