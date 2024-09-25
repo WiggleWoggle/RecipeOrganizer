@@ -21,23 +21,82 @@ namespace RecipeOrganizer
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Console.Write("TEST");
 
-            RecipeLayoutPanel.Controls.Add(createPanel());
+            Recipe createdRecipe = new Recipe("Recipe Name", "Recipe Description");
+            createdRecipe.addRecipeTag("TEST");
+            createdRecipe.addRecipeTag("TEST2");
+            createdRecipe.addRecipeTag("TEST3");
+
+            RecipeManager.addRecipe(createdRecipe);
+
+            RecipeLayoutPanel.Controls.Add(createPanel(createdRecipe));
         }
 
-        private Panel createPanel()
+        private void createUIRecipe(Recipe recipe)
+        {
+
+            createPanel(recipe);
+        }
+
+        private Panel createPanel(Recipe recipe)
         {
 
             Panel newPanel = new Panel();
             newPanel.BackColor = Color.SlateGray;
             newPanel.Size = new Size(502, 129);
+
             newPanel.Name = "Recipe-";
 
-            Label label = new Label();
-            label.Text = "TEST";
+            newPanel.Controls.Add(createTitle(recipe));
+            newPanel.Controls.Add(createDescription(recipe));
+            newPanel.Controls.Add(createTags(recipe));
 
             return newPanel;
+        }
+
+        private Label createTitle(Recipe recipe)
+        {
+
+            Label label = new Label();
+            label.Text = recipe.getRecipeName();
+            label.Font = new Font("Microsoft Sans Serif", 14);
+            label.Size = new Size(300, 24);
+
+            return label;
+        }
+
+        private Label createDescription(Recipe recipe)
+        {
+
+            Label label = new Label();
+            label.Text = recipe.getDescription();
+            label.Font = new Font("Microsoft Sans Serif", 9);
+            label.Size = new Size(300, 24);
+            label.Location = new Point(2, 25);
+
+            return label;
+        }
+
+        private Label createTags(Recipe recipe)
+        {
+
+            Label label = new Label();
+
+            String tags = "";
+
+            foreach (String tag in recipe.getTags())
+            {
+
+                tags += tag + ", ";
+            }
+
+            label.Text = tags;
+
+            label.Font = new Font("Microsoft Sans Serif", 7);
+            label.Size = new Size(300, 24);
+            label.Location = new Point(2, 110);
+
+            return label;
         }
 
         private void label15_Click(object sender, EventArgs e)
