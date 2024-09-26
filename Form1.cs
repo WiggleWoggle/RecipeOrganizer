@@ -13,6 +13,9 @@ namespace RecipeOrganizer
 {
     public partial class Form1 : Form
     {
+
+        private List<Recipe> displayedRecipes = new List<Recipe>();
+
         public Form1()
         {
             InitializeComponent();
@@ -30,13 +33,22 @@ namespace RecipeOrganizer
             RecipeManager.addRecipe(createdRecipe);
 
             RecipeLayoutPanel.Controls.Add(createPanel(createdRecipe));
+
+            TabPage createdTab = new TabPage(createdRecipe.getRecipeName());
+
+            RecipeTabControl.TabPages.Add(createdTab);
+
+            updateNoBookmarkLabel();
         }
 
-        private void createUIRecipe(Recipe recipe)
+        //Search Bar Functionality
+
+        private void SearchInputText_TextChanged(object sender, EventArgs e)
         {
-
-            createPanel(recipe);
+            Console.Write("TEST");
         }
+
+        //UI Recipe Updating/Creation
 
         private Panel createPanel(Recipe recipe)
         {
@@ -99,10 +111,19 @@ namespace RecipeOrganizer
             return label;
         }
 
-        private void label15_Click(object sender, EventArgs e)
+        private void updateNoBookmarkLabel()
         {
 
+            if (RecipeManager.recipeSize() > 0)
+            {
+                NoBookmarksLabel.Visible = false;
+            } else
+            {
+                NoBookmarksLabel.Visible = true;
+            }
         }
+
+        //SQL Server Methods
 
         private void SQLserver()
         {
@@ -129,7 +150,6 @@ namespace RecipeOrganizer
                 System.Diagnostics.Debug.WriteLine("An error occurred: " + ex.Message);
             }
         }
-
     }
 
 }
