@@ -25,7 +25,7 @@ namespace RecipeOrganizer
         private void button1_Click(object sender, EventArgs e)
         {
 
-            Recipe createdRecipe = new Recipe("Recipe Name", "Recipe Description");
+            Recipe createdRecipe = new Recipe("Recipe Name");
             createdRecipe.addRecipeTag("TEST");
             createdRecipe.addRecipeTag("TEST2");
             createdRecipe.addRecipeTag("TEST3");
@@ -34,7 +34,7 @@ namespace RecipeOrganizer
 
             RecipeLayoutPanel.Controls.Add(createPanel(createdRecipe));
 
-            TabPage createdTab = new TabPage(createdRecipe.getRecipeName());
+            TabPage createdTab = new TabPage(createdRecipe.getName());
 
             RecipeTabControl.TabPages.Add(createdTab);
 
@@ -55,12 +55,11 @@ namespace RecipeOrganizer
 
             Panel newPanel = new Panel();
             newPanel.BackColor = Color.SlateGray;
-            newPanel.Size = new Size(502, 129);
+            newPanel.Size = new Size(502, 50);
 
             newPanel.Name = "Recipe-";
 
             newPanel.Controls.Add(createTitle(recipe));
-            newPanel.Controls.Add(createDescription(recipe));
             newPanel.Controls.Add(createTags(recipe));
 
             return newPanel;
@@ -70,21 +69,9 @@ namespace RecipeOrganizer
         {
 
             Label label = new Label();
-            label.Text = recipe.getRecipeName();
+            label.Text = recipe.getName();
             label.Font = new Font("Microsoft Sans Serif", 14);
             label.Size = new Size(300, 24);
-
-            return label;
-        }
-
-        private Label createDescription(Recipe recipe)
-        {
-
-            Label label = new Label();
-            label.Text = recipe.getDescription();
-            label.Font = new Font("Microsoft Sans Serif", 9);
-            label.Size = new Size(300, 24);
-            label.Location = new Point(2, 25);
 
             return label;
         }
@@ -106,7 +93,7 @@ namespace RecipeOrganizer
 
             label.Font = new Font("Microsoft Sans Serif", 7);
             label.Size = new Size(300, 24);
-            label.Location = new Point(2, 110);
+            label.Location = new Point(2, 30);
 
             return label;
         }

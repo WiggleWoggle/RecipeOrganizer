@@ -9,9 +9,15 @@ namespace RecipeOrganizer
 
     internal class Recipe
     {
-
-        private String recipeName = " ";
-        private String recipeDescription = " ";
+        private int recipeID;
+        private String recipeName;
+        private String image;
+        private DateTime prepTime;
+        private String cuisine;
+        private String season;
+        private Boolean bookmarked;
+        private List<String> instructions;
+        private List<String> ingredients;
         private List<String> recipeTags = new List<String>();
 
         public Recipe()
@@ -19,33 +25,110 @@ namespace RecipeOrganizer
 
         }
 
-        public Recipe(String name, String description)
+        public Recipe(String name)
         {
-            setRecipeName(name);
-            setRecipeDescription(description);
-
+            setName(name);
         }
 
-        public String getRecipeName()
-        {
-            return recipeName;
-        }
-
-        public String getDescription()
-        {
-            return recipeDescription;
-        }
-
-        public void setRecipeName(String name)
+        public void setName(String name)
         {
 
             recipeName = name;
         }
 
-        public void setRecipeDescription(String description)
+        public void addInstruction(int index, String instruction)
         {
 
-            recipeDescription = description;
+        }
+
+        public String getInstruction(int index, String instruction)
+        {
+            return " ";
+        }
+
+        public void setInstruction(int index, String instruction)
+        {
+
+        }
+
+        public void addIngredient(int index, String ingredient)
+        {
+
+        }
+
+        public String getIngredient(int index, String ingredient)
+        {
+            return " ";
+        }
+
+        public void setIngredient(int index, String ingredient)
+        {
+
+        }
+
+        public void setPrepTime(DateTime time)
+        {
+
+        }
+
+        public DateTime getPrepTime()
+        {
+            return prepTime;
+        }
+
+        public void setImage(String link)
+        {
+
+        }
+
+        public String getImage()
+        {
+            return image;
+        }
+
+        public void setCuisine(String cuisine)
+        {
+
+        }
+
+        public String getCuisine()
+        {
+            return cuisine;
+        }
+
+        public void setSeason(String season)
+        {
+
+        }
+
+        public String getSeason()
+        {
+            return season;
+        }
+
+        public void toggleBookmark()
+        {
+
+        }
+
+        public Boolean isBookmarked()
+        {
+            return bookmarked;
+        }
+
+        public void importRecipe()
+        {
+
+        }
+
+        public void exportRecipe()
+        {
+
+        }
+
+        public String getName()
+        {
+            return recipeName;
         }
 
         public void addRecipeTag(String tag)
