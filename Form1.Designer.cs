@@ -30,13 +30,13 @@
         {
             this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
             this.Home = new System.Windows.Forms.TabPage();
-            this.SearchLabel = new System.Windows.Forms.TextBox();
-            this.SearchInputText = new System.Windows.Forms.TextBox();
-            this.ResultsLabel = new System.Windows.Forms.Label();
-            this.RecipeLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.RecipeTabControl = new System.Windows.Forms.TabControl();
             this.NoBookmarksLabel = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.RecipeLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.ResultsLabel = new System.Windows.Forms.Label();
+            this.SearchInputText = new System.Windows.Forms.TextBox();
+            this.SearchLabel = new System.Windows.Forms.TextBox();
+            this.RecipeTabControl = new System.Windows.Forms.TabControl();
             this.Home.SuspendLayout();
             this.RecipeTabControl.SuspendLayout();
             this.SuspendLayout();
@@ -64,41 +64,14 @@
             this.Home.TabIndex = 1;
             this.Home.Text = "Home";
             // 
-            // SearchLabel
+            // NoBookmarksLabel
             // 
-            this.SearchLabel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.SearchLabel.Location = new System.Drawing.Point(57, 22);
-            this.SearchLabel.Name = "SearchLabel";
-            this.SearchLabel.ReadOnly = true;
-            this.SearchLabel.Size = new System.Drawing.Size(41, 20);
-            this.SearchLabel.TabIndex = 4;
-            this.SearchLabel.Text = "Search";
-            // 
-            // SearchInputText
-            // 
-            this.SearchInputText.Location = new System.Drawing.Point(97, 22);
-            this.SearchInputText.Name = "SearchInputText";
-            this.SearchInputText.Size = new System.Drawing.Size(461, 20);
-            this.SearchInputText.TabIndex = 5;
-            this.SearchInputText.Text = "...";
-            this.SearchInputText.TextChanged += new System.EventHandler(this.SearchInputText_TextChanged);
-            // 
-            // ResultsLabel
-            // 
-            this.ResultsLabel.AutoSize = true;
-            this.ResultsLabel.Location = new System.Drawing.Point(54, 58);
-            this.ResultsLabel.Name = "ResultsLabel";
-            this.ResultsLabel.Size = new System.Drawing.Size(45, 13);
-            this.ResultsLabel.TabIndex = 7;
-            this.ResultsLabel.Text = "Results:";
-            // 
-            // RecipeLayoutPanel
-            // 
-            this.RecipeLayoutPanel.AutoScroll = true;
-            this.RecipeLayoutPanel.Location = new System.Drawing.Point(53, 74);
-            this.RecipeLayoutPanel.Name = "RecipeLayoutPanel";
-            this.RecipeLayoutPanel.Size = new System.Drawing.Size(564, 588);
-            this.RecipeLayoutPanel.TabIndex = 8;
+            this.NoBookmarksLabel.AutoSize = true;
+            this.NoBookmarksLabel.Location = new System.Drawing.Point(228, 58);
+            this.NoBookmarksLabel.Name = "NoBookmarksLabel";
+            this.NoBookmarksLabel.Size = new System.Drawing.Size(170, 13);
+            this.NoBookmarksLabel.TabIndex = 10;
+            this.NoBookmarksLabel.Text = "You have no bookmarked recipes.";
             // 
             // button1
             // 
@@ -110,6 +83,42 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // RecipeLayoutPanel
+            // 
+            this.RecipeLayoutPanel.AutoScroll = true;
+            this.RecipeLayoutPanel.Location = new System.Drawing.Point(53, 74);
+            this.RecipeLayoutPanel.Name = "RecipeLayoutPanel";
+            this.RecipeLayoutPanel.Size = new System.Drawing.Size(564, 588);
+            this.RecipeLayoutPanel.TabIndex = 8;
+            // 
+            // ResultsLabel
+            // 
+            this.ResultsLabel.AutoSize = true;
+            this.ResultsLabel.Location = new System.Drawing.Point(54, 58);
+            this.ResultsLabel.Name = "ResultsLabel";
+            this.ResultsLabel.Size = new System.Drawing.Size(45, 13);
+            this.ResultsLabel.TabIndex = 7;
+            this.ResultsLabel.Text = "Results:";
+            // 
+            // SearchInputText
+            // 
+            this.SearchInputText.Location = new System.Drawing.Point(97, 22);
+            this.SearchInputText.Name = "SearchInputText";
+            this.SearchInputText.Size = new System.Drawing.Size(461, 20);
+            this.SearchInputText.TabIndex = 5;
+            this.SearchInputText.Text = "...";
+            this.SearchInputText.TextChanged += new System.EventHandler(this.SearchInputText_TextChanged);
+            // 
+            // SearchLabel
+            // 
+            this.SearchLabel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.SearchLabel.Location = new System.Drawing.Point(57, 22);
+            this.SearchLabel.Name = "SearchLabel";
+            this.SearchLabel.ReadOnly = true;
+            this.SearchLabel.Size = new System.Drawing.Size(41, 20);
+            this.SearchLabel.TabIndex = 4;
+            this.SearchLabel.Text = "Search";
+            // 
             // RecipeTabControl
             // 
             this.RecipeTabControl.Controls.Add(this.Home);
@@ -119,15 +128,6 @@
             this.RecipeTabControl.SelectedIndex = 0;
             this.RecipeTabControl.Size = new System.Drawing.Size(625, 688);
             this.RecipeTabControl.TabIndex = 3;
-            // 
-            // NoBookmarksLabel
-            // 
-            this.NoBookmarksLabel.AutoSize = true;
-            this.NoBookmarksLabel.Location = new System.Drawing.Point(228, 58);
-            this.NoBookmarksLabel.Name = "NoBookmarksLabel";
-            this.NoBookmarksLabel.Size = new System.Drawing.Size(170, 13);
-            this.NoBookmarksLabel.TabIndex = 10;
-            this.NoBookmarksLabel.Text = "You have no bookmarked recipes.";
             // 
             // Form1
             // 
