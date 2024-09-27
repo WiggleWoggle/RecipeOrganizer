@@ -16,17 +16,19 @@ namespace RecipeOrganizer
 
         private List<Recipe> bookmarkedRecipes = new List<Recipe>();
         private List<Recipe> displayedRecipes = new List<Recipe>();
+        private Random random;
 
         public Form1()
         {
+
+            random = new Random();
+
             InitializeComponent();
             SQLserver();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            Random random = new Random();
 
             Recipe createdRecipe = new Recipe("Recipe Name " + random.Next(1, 101));
             createdRecipe.addRecipeTag("TEST");
@@ -41,6 +43,7 @@ namespace RecipeOrganizer
 
         private void displayRecipes()
         {
+            clearRecipes();
 
             foreach (Recipe recipe in displayedRecipes)
             {
@@ -66,7 +69,6 @@ namespace RecipeOrganizer
             RecipeManager.addRecipe(recipe);
 
             RecipeLayoutPanel.Controls.Add(createPanel(recipe));
-
 
             createPanel(recipe);
 
