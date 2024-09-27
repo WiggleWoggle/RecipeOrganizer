@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,7 @@ namespace RecipeOrganizer
         private void button1_Click(object sender, EventArgs e)
         {
 
-            Recipe createdRecipe = new Recipe("Recipe Name", "Recipe Description");
+            Recipe createdRecipe = new Recipe("Recipe Name");
             createdRecipe.addRecipeTag("TEST");
             createdRecipe.addRecipeTag("TEST2");
             createdRecipe.addRecipeTag("TEST3");
@@ -28,28 +29,33 @@ namespace RecipeOrganizer
             RecipeManager.addRecipe(createdRecipe);
 
             RecipeLayoutPanel.Controls.Add(createPanel(createdRecipe));
+
+            TabPage createdTab = new TabPage(createdRecipe.getName());
+
+            RecipeTabControl.TabPages.Add(createdTab);
+
+            updateNoBookmarkLabel();
         }
 
-        private void createUIRecipe(Recipe recipe)
+        //Search Bar Functionality
+
+        private void SearchInputText_TextChanged(object sender, EventArgs e)
         {
-
-            createPanel(recipe);
+            Console.Write("TEST");
         }
+
+        //UI Recipe Updating/Creation
 
         private Panel createPanel(Recipe recipe)
         {
 
             Panel newPanel = new Panel();
             newPanel.BackColor = Color.SlateGray;
-            newPanel.Size = new Size(502, 129);
+            newPanel.Size = new Size(502, 50);
 
-            //for setting object name in solution explorer
-            //String recipeLocation = RecipeManager.recipes
-
-            newPanel.Name = "Recipe-" ;
+            newPanel.Name = "Recipe-";
 
             newPanel.Controls.Add(createTitle(recipe));
-            newPanel.Controls.Add(createDescription(recipe));
             newPanel.Controls.Add(createTags(recipe));
 
             return newPanel;
@@ -59,25 +65,9 @@ namespace RecipeOrganizer
         {
 
             Label label = new Label();
-            label.Text = recipe.getRecipeName();
+            label.Text = recipe.getName();
             label.Font = new Font("Microsoft Sans Serif", 14);
             label.Size = new Size(300, 24);
-
-            //need to set object name for solution explorer
-
-            return label;
-        }
-
-        private Label createDescription(Recipe recipe)
-        {
-
-            Label label = new Label();
-            label.Text = recipe.getDescription();
-            label.Font = new Font("Microsoft Sans Serif", 9);
-            label.Size = new Size(300, 24);
-            label.Location = new Point(2, 25);
-
-            //need to set object name for solution explorer
 
             return label;
         }
@@ -99,9 +89,50 @@ namespace RecipeOrganizer
 
             label.Font = new Font("Microsoft Sans Serif", 7);
             label.Size = new Size(300, 24);
-            label.Location = new Point(2, 110);
+            label.Location = new Point(2, 30);
 
             return label;
         }
-    }       
-}
+
+        private void updateNoBookmarkLabel()
+        {
+
+            if (RecipeManager.recipeSize() > 0)
+            {
+                NoBookmarksLabel.Visible = false;
+            }
+            else
+            {
+                NoBookmarksLabel.Visible = true;
+            }
+        }
+
+        //SQL Server Methods
+
+        private void SQLserver()
+        {
+            string connectionString = @"Server=(localdb)\MSSQLLocalDB;Integrated Security=true";
+
+            string createDbQuery = "CREATE DATABASE recipies";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand(createDbQuery, conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                        System.Diagnostics.Debug.WriteLine("LocalDB database 'recipie' created successfully");
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("An error occurred: " + ex.Message);
+            }
+        }
+    }
+   }

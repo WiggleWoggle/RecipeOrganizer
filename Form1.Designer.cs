@@ -28,37 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.Home = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.RecipeLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.ResultsLabel = new System.Windows.Forms.Label();
-            this.SearchInputText = new System.Windows.Forms.TextBox();
-            this.SearchLabel = new System.Windows.Forms.TextBox();
-            this.Recipe1 = new System.Windows.Forms.TabPage();
-            this.Recipe2 = new System.Windows.Forms.TabPage();
             this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tabControl1.SuspendLayout();
+            this.Home = new System.Windows.Forms.TabPage();
+            this.SearchLabel = new System.Windows.Forms.TextBox();
+            this.SearchInputText = new System.Windows.Forms.TextBox();
+            this.ResultsLabel = new System.Windows.Forms.Label();
+            this.RecipeLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.RecipeTabControl = new System.Windows.Forms.TabControl();
+            this.NoBookmarksLabel = new System.Windows.Forms.Label();
             this.Home.SuspendLayout();
+            this.RecipeTabControl.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // hScrollBar1
             // 
-            this.tabControl1.Controls.Add(this.Home);
-            this.tabControl1.Controls.Add(this.Recipe1);
-            this.tabControl1.Controls.Add(this.Recipe2);
-            this.tabControl1.ItemSize = new System.Drawing.Size(58, 18);
-            this.tabControl1.Location = new System.Drawing.Point(-1, 1);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(625, 688);
-            this.tabControl1.TabIndex = 3;
+            this.hScrollBar1.Location = new System.Drawing.Point(644, 131);
+            this.hScrollBar1.Name = "hScrollBar1";
+            this.hScrollBar1.Size = new System.Drawing.Size(80, 17);
+            this.hScrollBar1.TabIndex = 4;
             // 
             // Home
             // 
             this.Home.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.Home.Controls.Add(this.label1);
+            this.Home.Controls.Add(this.NoBookmarksLabel);
             this.Home.Controls.Add(this.button1);
             this.Home.Controls.Add(this.RecipeLayoutPanel);
             this.Home.Controls.Add(this.ResultsLabel);
@@ -71,41 +64,6 @@
             this.Home.TabIndex = 1;
             this.Home.Text = "Home";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(483, 45);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Add Recipe";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // RecipeLayoutPanel
-            // 
-            this.RecipeLayoutPanel.AutoScroll = true;
-            this.RecipeLayoutPanel.Location = new System.Drawing.Point(53, 74);
-            this.RecipeLayoutPanel.Name = "RecipeLayoutPanel";
-            this.RecipeLayoutPanel.Size = new System.Drawing.Size(564, 588);
-            this.RecipeLayoutPanel.TabIndex = 8;
-            // 
-            // ResultsLabel
-            // 
-            this.ResultsLabel.AutoSize = true;
-            this.ResultsLabel.Location = new System.Drawing.Point(54, 58);
-            this.ResultsLabel.Name = "ResultsLabel";
-            this.ResultsLabel.Size = new System.Drawing.Size(45, 13);
-            this.ResultsLabel.TabIndex = 7;
-            this.ResultsLabel.Text = "Results:";
-            // 
-            // SearchInputText
-            // 
-            this.SearchInputText.Location = new System.Drawing.Point(97, 22);
-            this.SearchInputText.Name = "SearchInputText";
-            this.SearchInputText.Size = new System.Drawing.Size(461, 20);
-            this.SearchInputText.TabIndex = 5;
-            this.SearchInputText.Text = "...";
-            // 
             // SearchLabel
             // 
             this.SearchLabel.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -116,41 +74,60 @@
             this.SearchLabel.TabIndex = 4;
             this.SearchLabel.Text = "Search";
             // 
-            // Recipe1
+            // SearchInputText
             // 
-            this.Recipe1.Location = new System.Drawing.Point(4, 22);
-            this.Recipe1.Name = "Recipe1";
-            this.Recipe1.Padding = new System.Windows.Forms.Padding(3);
-            this.Recipe1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Recipe1.Size = new System.Drawing.Size(617, 662);
-            this.Recipe1.TabIndex = 0;
-            this.Recipe1.Text = "Recipe 1";
-            this.Recipe1.UseVisualStyleBackColor = true;
+            this.SearchInputText.Location = new System.Drawing.Point(97, 22);
+            this.SearchInputText.Name = "SearchInputText";
+            this.SearchInputText.Size = new System.Drawing.Size(461, 20);
+            this.SearchInputText.TabIndex = 5;
+            this.SearchInputText.Text = "...";
+            this.SearchInputText.TextChanged += new System.EventHandler(this.SearchInputText_TextChanged);
             // 
-            // Recipe2
+            // ResultsLabel
             // 
-            this.Recipe2.Location = new System.Drawing.Point(4, 22);
-            this.Recipe2.Name = "Recipe2";
-            this.Recipe2.Size = new System.Drawing.Size(617, 662);
-            this.Recipe2.TabIndex = 2;
-            this.Recipe2.Text = "Recipe 2";
-            this.Recipe2.UseVisualStyleBackColor = true;
+            this.ResultsLabel.AutoSize = true;
+            this.ResultsLabel.Location = new System.Drawing.Point(54, 58);
+            this.ResultsLabel.Name = "ResultsLabel";
+            this.ResultsLabel.Size = new System.Drawing.Size(45, 13);
+            this.ResultsLabel.TabIndex = 7;
+            this.ResultsLabel.Text = "Results:";
             // 
-            // hScrollBar1
+            // RecipeLayoutPanel
             // 
-            this.hScrollBar1.Location = new System.Drawing.Point(644, 131);
-            this.hScrollBar1.Name = "hScrollBar1";
-            this.hScrollBar1.Size = new System.Drawing.Size(80, 17);
-            this.hScrollBar1.TabIndex = 4;
+            this.RecipeLayoutPanel.AutoScroll = true;
+            this.RecipeLayoutPanel.Location = new System.Drawing.Point(53, 74);
+            this.RecipeLayoutPanel.Name = "RecipeLayoutPanel";
+            this.RecipeLayoutPanel.Size = new System.Drawing.Size(564, 588);
+            this.RecipeLayoutPanel.TabIndex = 8;
             // 
-            // label1
+            // button1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(269, 58);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(108, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "You have no recipes.";
+            this.button1.Location = new System.Drawing.Point(483, 45);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "Add Recipe";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // RecipeTabControl
+            // 
+            this.RecipeTabControl.Controls.Add(this.Home);
+            this.RecipeTabControl.ItemSize = new System.Drawing.Size(58, 18);
+            this.RecipeTabControl.Location = new System.Drawing.Point(-1, 1);
+            this.RecipeTabControl.Name = "RecipeTabControl";
+            this.RecipeTabControl.SelectedIndex = 0;
+            this.RecipeTabControl.Size = new System.Drawing.Size(625, 688);
+            this.RecipeTabControl.TabIndex = 3;
+            // 
+            // NoBookmarksLabel
+            // 
+            this.NoBookmarksLabel.AutoSize = true;
+            this.NoBookmarksLabel.Location = new System.Drawing.Point(228, 58);
+            this.NoBookmarksLabel.Name = "NoBookmarksLabel";
+            this.NoBookmarksLabel.Size = new System.Drawing.Size(170, 13);
+            this.NoBookmarksLabel.TabIndex = 10;
+            this.NoBookmarksLabel.Text = "You have no bookmarked recipes.";
             // 
             // Form1
             // 
@@ -159,29 +136,27 @@
             this.BackColor = System.Drawing.Color.LightSlateGray;
             this.ClientSize = new System.Drawing.Size(642, 686);
             this.Controls.Add(this.hScrollBar1);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.RecipeTabControl);
             this.Name = "Form1";
             this.Text = "Recipe Organizer";
-            this.tabControl1.ResumeLayout(false);
             this.Home.ResumeLayout(false);
             this.Home.PerformLayout();
+            this.RecipeTabControl.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage Home;
-        private System.Windows.Forms.TabPage Recipe1;
-        private System.Windows.Forms.TextBox SearchInputText;
         private System.Windows.Forms.HScrollBar hScrollBar1;
-        private System.Windows.Forms.TabPage Recipe2;
         private System.Windows.Forms.Label Test;
-        private System.Windows.Forms.Label ResultsLabel;
-        private System.Windows.Forms.TextBox SearchLabel;
-        private System.Windows.Forms.FlowLayoutPanel RecipeLayoutPanel;
+        private System.Windows.Forms.TabPage Home;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.FlowLayoutPanel RecipeLayoutPanel;
+        private System.Windows.Forms.Label ResultsLabel;
+        private System.Windows.Forms.TextBox SearchInputText;
+        private System.Windows.Forms.TextBox SearchLabel;
+        private System.Windows.Forms.TabControl RecipeTabControl;
+        private System.Windows.Forms.Label NoBookmarksLabel;
     }
 }
 
