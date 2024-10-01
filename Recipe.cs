@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace RecipeOrganizer
 {
@@ -16,18 +18,43 @@ namespace RecipeOrganizer
         private String cuisine;
         private String season;
         private Boolean bookmarked;
-        private List<String> instructions;
-        private List<String> ingredients;
+        private List<String> instructions = new List<String>();
+        private List<String> ingredients = new List<String>();
         private List<String> recipeTags = new List<String>();
+        private Panel syncedRecipePanel;
 
         public Recipe()
         {
 
         }
 
+        public Recipe(int recipeID, String recipeName, String image, DateTime prepTime, String cuisine, String season, Boolean bookmarked, List<String> instructions, List<String> ingredients, List<String> recipeTags)
+        {
+            setRecipeID(recipeID);
+            setName(recipeName);
+            setImage(image);
+            setPrepTime(prepTime);
+            setCuisine(cuisine);
+            setSeason(season);
+            bookmarked = false;
+            this.instructions = instructions;
+            this.ingredients = ingredients;
+            this.recipeTags = recipeTags;
+        }
+
         public Recipe(String name)
         {
             setName(name);
+        }
+
+        public void setRecipeID(int id)
+        {
+            recipeID = id;
+        }
+
+        public int getRecipeID()
+        {
+            return recipeID;
         }
 
         public void setName(String name)
@@ -48,7 +75,7 @@ namespace RecipeOrganizer
 
         public void setInstruction(int index, String instruction)
         {
-
+            instructions[index] = instruction;
         }
 
         public void addIngredient(int index, String ingredient)
@@ -134,10 +161,7 @@ namespace RecipeOrganizer
         public void addRecipeTag(String tag)
         {
 
-            if (!recipeTags.Contains(tag))
-            {
-                recipeTags.Add(tag);
-            }
+            recipeTags.Add(tag);
         }
 
         public void removeTag(String tag)
@@ -153,6 +177,16 @@ namespace RecipeOrganizer
         {
 
             return recipeTags;
+        }
+
+        public void setSyncedPanel(Panel panel)
+        {
+            syncedRecipePanel = panel; 
+        }
+
+        public Panel getSyncedPanel()
+        {
+            return syncedRecipePanel; 
         }
     }
 }

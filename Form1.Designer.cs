@@ -30,13 +30,14 @@
         {
             this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
             this.Home = new System.Windows.Forms.TabPage();
+            this.NoResultsLabel = new System.Windows.Forms.Label();
             this.NoBookmarksLabel = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.RecipeLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.ResultsLabel = new System.Windows.Forms.Label();
             this.SearchInputText = new System.Windows.Forms.TextBox();
-            this.SearchLabel = new System.Windows.Forms.TextBox();
             this.RecipeTabControl = new System.Windows.Forms.TabControl();
+            this.searchButton = new System.Windows.Forms.Button();
             this.Home.SuspendLayout();
             this.RecipeTabControl.SuspendLayout();
             this.SuspendLayout();
@@ -51,18 +52,28 @@
             // Home
             // 
             this.Home.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Home.Controls.Add(this.searchButton);
+            this.Home.Controls.Add(this.NoResultsLabel);
             this.Home.Controls.Add(this.NoBookmarksLabel);
             this.Home.Controls.Add(this.button1);
             this.Home.Controls.Add(this.RecipeLayoutPanel);
             this.Home.Controls.Add(this.ResultsLabel);
             this.Home.Controls.Add(this.SearchInputText);
-            this.Home.Controls.Add(this.SearchLabel);
             this.Home.Location = new System.Drawing.Point(4, 22);
             this.Home.Name = "Home";
             this.Home.Padding = new System.Windows.Forms.Padding(3);
             this.Home.Size = new System.Drawing.Size(617, 662);
             this.Home.TabIndex = 1;
             this.Home.Text = "Home";
+            // 
+            // NoResultsLabel
+            // 
+            this.NoResultsLabel.AutoSize = true;
+            this.NoResultsLabel.Location = new System.Drawing.Point(94, 58);
+            this.NoResultsLabel.Name = "NoResultsLabel";
+            this.NoResultsLabel.Size = new System.Drawing.Size(57, 13);
+            this.NoResultsLabel.TabIndex = 11;
+            this.NoResultsLabel.Text = "No results.";
             // 
             // NoBookmarksLabel
             // 
@@ -102,22 +113,12 @@
             // 
             // SearchInputText
             // 
-            this.SearchInputText.Location = new System.Drawing.Point(97, 22);
+            this.SearchInputText.Location = new System.Drawing.Point(108, 22);
             this.SearchInputText.Name = "SearchInputText";
-            this.SearchInputText.Size = new System.Drawing.Size(461, 20);
+            this.SearchInputText.Size = new System.Drawing.Size(450, 20);
             this.SearchInputText.TabIndex = 5;
             this.SearchInputText.Text = "...";
             this.SearchInputText.TextChanged += new System.EventHandler(this.SearchInputText_TextChanged);
-            // 
-            // SearchLabel
-            // 
-            this.SearchLabel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.SearchLabel.Location = new System.Drawing.Point(57, 22);
-            this.SearchLabel.Name = "SearchLabel";
-            this.SearchLabel.ReadOnly = true;
-            this.SearchLabel.Size = new System.Drawing.Size(41, 20);
-            this.SearchLabel.TabIndex = 4;
-            this.SearchLabel.Text = "Search";
             // 
             // RecipeTabControl
             // 
@@ -128,6 +129,17 @@
             this.RecipeTabControl.SelectedIndex = 0;
             this.RecipeTabControl.Size = new System.Drawing.Size(625, 688);
             this.RecipeTabControl.TabIndex = 3;
+            // 
+            // searchButton
+            // 
+            this.searchButton.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.searchButton.Location = new System.Drawing.Point(53, 20);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(58, 23);
+            this.searchButton.TabIndex = 12;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = false;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // Form1
             // 
@@ -154,9 +166,10 @@
         private System.Windows.Forms.FlowLayoutPanel RecipeLayoutPanel;
         private System.Windows.Forms.Label ResultsLabel;
         private System.Windows.Forms.TextBox SearchInputText;
-        private System.Windows.Forms.TextBox SearchLabel;
         private System.Windows.Forms.TabControl RecipeTabControl;
         private System.Windows.Forms.Label NoBookmarksLabel;
+        private System.Windows.Forms.Label NoResultsLabel;
+        private System.Windows.Forms.Button searchButton;
     }
 }
 
