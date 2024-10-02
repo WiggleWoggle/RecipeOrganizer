@@ -12,7 +12,7 @@ namespace RecipeOrganizer
         public static List<Recipe> recipes = new List<Recipe>();
 
         //TODO: populate this list with bookmarked recipes saved in the sql server
-        private static List<Recipe> bookmarkedRecipes = new List<Recipe>();
+        public static List<Recipe> bookmarkedRecipes = new List<Recipe>();
 
         public static void addRecipe(Recipe recipe)
         {
