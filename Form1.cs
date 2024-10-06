@@ -15,52 +15,28 @@ namespace RecipeOrganizer
     {
 
         private List<Recipe> displayedRecipes = new List<Recipe>();
-        private Random random;
 
         public Form1()
         {
 
-            random = new Random();
+            RecipeManager.initRecipes();
 
             InitializeComponent();
-<<<<<<< Updated upstream
-=======
 
             this.MaximumSize = new System.Drawing.Size(640, 729);
             this.MinimumSize = this.MaximumSize;
 
->>>>>>> Stashed changes
             SQLserver();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-            Recipe createdRecipe = new Recipe("Recipe Name " + random.Next(1, 101));
-            createdRecipe.addRecipeTag("TEST");
-            createdRecipe.addRecipeTag("TEST2");
-            createdRecipe.addRecipeTag("TEST3");
-
-            RecipeManager.bookmarkedRecipes.Add(createdRecipe);
-            displayedRecipes.Add(createdRecipe);
-
-            displayRecipes();
         }
 
         private void displayRecipes()
         {
-            clearRecipes();
+            RecipeLayoutPanel.Controls.Clear();
 
             foreach (Recipe recipe in displayedRecipes)
             {
                 buildRecipe(recipe);
             }
-        }
-
-        private void clearRecipes()
-        {
-
-            RecipeLayoutPanel.Controls.Clear();
         }
 
         private void resetDisplayedToBookmarked()
@@ -71,8 +47,6 @@ namespace RecipeOrganizer
 
         private void buildRecipe(Recipe recipe)
         {
-
-            RecipeManager.addRecipe(recipe);
 
             RecipeLayoutPanel.Controls.Add(createPanel(recipe));
 
@@ -85,7 +59,7 @@ namespace RecipeOrganizer
 
         private void SearchInputText_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void searchButton_Click(object sender, EventArgs e)
@@ -93,7 +67,7 @@ namespace RecipeOrganizer
             TextBox textBox = SearchInputText;
             if (textBox != null)
             {
-                clearRecipes();
+                RecipeLayoutPanel.Controls.Clear();
                 updateDisplayedRecipes(textBox.Text);
                 displayRecipes();
             }
@@ -108,38 +82,28 @@ namespace RecipeOrganizer
 
             List<Recipe> temp = new List<Recipe>();
 
-            foreach (Recipe recipe in RecipeManager.bookmarkedRecipes)
+            displayedRecipes.Clear();
+
+            foreach (Recipe recipe in RecipeManager.recipes)
             {
-
-<<<<<<< Updated upstream
-                if (recipe.getName().Contains(textboxString)) {
-=======
                 String recipeName = recipe.getName();
-
                 if (recipeName.IndexOf(textboxString, 0, StringComparison.OrdinalIgnoreCase) != -1)
                 {
->>>>>>> Stashed changes
 
-                    temp.Add(recipe);
-                }
-                else
+                    displayedRecipes.Add(recipe);
+                } else
                 {
                     foreach (String tagName in recipe.getTags())
                     {
                         if (tagName.IndexOf(textboxString, 0, StringComparison.OrdinalIgnoreCase) != -1)
                         {
 
-<<<<<<< Updated upstream
-            displayedRecipes = temp;
-=======
                             displayedRecipes.Add(recipe);
                             break;
                         }
                     }
                 }
-
             }
->>>>>>> Stashed changes
         }
 
         //Click Handler
@@ -147,11 +111,27 @@ namespace RecipeOrganizer
         {
 
             Panel panel = sender as Panel;
-            panel.BackColor = Color.White;
 
             if (!foundRecipe(panel))
             {
                 RecipeLayoutPanel.Controls.Remove(panel);
+            }
+        }
+
+        private void control_Click(object sender, EventArgs e)
+        {
+
+            Control control = sender as Control;
+
+            foreach (Panel panel in RecipeLayoutPanel.Controls)
+            {
+                if (panel.Controls.Contains(control))
+                {
+                    if (!foundRecipe(panel))
+                    {
+                        RecipeLayoutPanel.Controls.Remove(panel);
+                    }
+                }
             }
         }
 
@@ -162,9 +142,39 @@ namespace RecipeOrganizer
             {
                 if (recipe.getSyncedPanel().Name.Equals(panel.Name))
                 {
-                    TabPage newTabPage = new TabPage(recipe.getName());
 
-                    RecipeTabControl.TabPages.Add(newTabPage);
+                    createRecipeTab(recipe);
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private void createRecipeTab(Recipe recipe)
+        {
+
+            TabPage newTabPage = new TabPage(recipe.getName());
+
+            if (!recipeAlreadyOpenInAnotherTab(newTabPage))
+            {
+
+                RecipeTabControl.TabPages.Add(newTabPage);
+                UIBuilder.buildRecipePage(newTabPage, recipe);
+                RecipeTabControl.SelectedTab = newTabPage;
+            }
+        }
+
+        private bool recipeAlreadyOpenInAnotherTab(TabPage newTab)
+        {
+
+            foreach (TabPage page in RecipeTabControl.TabPages)
+            {
+                if (page.Text.Equals(newTab.Text))
+                {
+
+                    RecipeTabControl.SelectedTab = page;
 
                     return true;
                 }
@@ -178,70 +188,21 @@ namespace RecipeOrganizer
         private Panel createPanel(Recipe recipe)
         {
 
-            Panel newPanel = new Panel();
-            newPanel.BackColor = Color.SlateGray;
-            newPanel.Size = new Size(502, 50);
+            Panel panel = UIBuilder.buildHomePagePanel(recipe);
 
-            newPanel.Name = "Recipe-" + recipe.getName();
+            panel.Click += recipe_Click;
 
-            newPanel.Click += recipe_Click;
-
-            newPanel.Controls.Add(createTitle(recipe));
-            newPanel.Controls.Add(createTags(recipe));
-            newPanel.Controls.Add(bookmarkLabel(recipe));
-
-            recipe.setSyncedPanel(newPanel);
-
-            return newPanel;
-        }
-
-        private Label createTitle(Recipe recipe)
-        {
-
-            Label label = new Label();
-            label.Text = recipe.getName();
-            label.Font = new Font("Microsoft Sans Serif", 14);
-            label.Size = new Size(300, 24);
-
-            return label;
-        }
-
-        private Label createTags(Recipe recipe)
-        {
-
-            Label label = new Label();
-
-            String tags = "";
-
-            if (recipe.getTags() != null)
+            foreach (Control control in panel.Controls)
             {
-                foreach (String tag in recipe.getTags())
+                if (control is Label || control is PictureBox)
                 {
-
-                    tags += tag + ", ";
+                    control.Click += control_Click;
                 }
             }
 
-            label.Text = tags;
-
-            label.Font = new Font("Microsoft Sans Serif", 7);
-            label.Size = new Size(300, 24);
-            label.Location = new Point(2, 30);
-
-            return label;
+            return panel;
         }
 
-        private PictureBox bookmarkLabel(Recipe recipe)
-        {
-
-            PictureBox image = new PictureBox();
-            image.Image = Resources.bookmark_icon;
-            image.SizeMode = PictureBoxSizeMode.StretchImage;
-            image.Size = new Size(20, 18);
-            image.Location = new Point(475, 5);
-
-            return image;
-        }
 
         private void updateNoBookmarkLabel()
         {
@@ -255,8 +216,6 @@ namespace RecipeOrganizer
                 NoBookmarksLabel.Visible = true;
             }
         }
-
-
 
         //SQL Server Methods
 
