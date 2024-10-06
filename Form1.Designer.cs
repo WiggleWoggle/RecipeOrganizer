@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
             this.Home = new System.Windows.Forms.TabPage();
+            this.searchButton = new System.Windows.Forms.Button();
             this.NoResultsLabel = new System.Windows.Forms.Label();
             this.NoBookmarksLabel = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.RecipeLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.ResultsLabel = new System.Windows.Forms.Label();
             this.SearchInputText = new System.Windows.Forms.TextBox();
             this.RecipeTabControl = new System.Windows.Forms.TabControl();
-            this.searchButton = new System.Windows.Forms.Button();
             this.Home.SuspendLayout();
             this.RecipeTabControl.SuspendLayout();
             this.SuspendLayout();
@@ -55,7 +55,6 @@
             this.Home.Controls.Add(this.searchButton);
             this.Home.Controls.Add(this.NoResultsLabel);
             this.Home.Controls.Add(this.NoBookmarksLabel);
-            this.Home.Controls.Add(this.button1);
             this.Home.Controls.Add(this.RecipeLayoutPanel);
             this.Home.Controls.Add(this.ResultsLabel);
             this.Home.Controls.Add(this.SearchInputText);
@@ -65,6 +64,17 @@
             this.Home.Size = new System.Drawing.Size(617, 662);
             this.Home.TabIndex = 1;
             this.Home.Text = "Home";
+            // 
+            // searchButton
+            // 
+            this.searchButton.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.searchButton.Location = new System.Drawing.Point(53, 20);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(58, 23);
+            this.searchButton.TabIndex = 12;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = false;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // NoResultsLabel
             // 
@@ -83,16 +93,6 @@
             this.NoBookmarksLabel.Size = new System.Drawing.Size(170, 13);
             this.NoBookmarksLabel.TabIndex = 10;
             this.NoBookmarksLabel.Text = "You have no bookmarked recipes.";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(483, 45);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Add Recipe";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // RecipeLayoutPanel
             // 
@@ -130,17 +130,6 @@
             this.RecipeTabControl.Size = new System.Drawing.Size(625, 688);
             this.RecipeTabControl.TabIndex = 3;
             // 
-            // searchButton
-            // 
-            this.searchButton.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.searchButton.Location = new System.Drawing.Point(53, 20);
-            this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(58, 23);
-            this.searchButton.TabIndex = 12;
-            this.searchButton.Text = "Search";
-            this.searchButton.UseVisualStyleBackColor = false;
-            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -149,6 +138,7 @@
             this.ClientSize = new System.Drawing.Size(642, 686);
             this.Controls.Add(this.hScrollBar1);
             this.Controls.Add(this.RecipeTabControl);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Recipe Organizer";
             this.Home.ResumeLayout(false);
@@ -162,7 +152,6 @@
         private System.Windows.Forms.HScrollBar hScrollBar1;
         private System.Windows.Forms.Label Test;
         private System.Windows.Forms.TabPage Home;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.FlowLayoutPanel RecipeLayoutPanel;
         private System.Windows.Forms.Label ResultsLabel;
         private System.Windows.Forms.TextBox SearchInputText;

@@ -23,6 +23,13 @@ namespace RecipeOrganizer
             random = new Random();
 
             InitializeComponent();
+<<<<<<< Updated upstream
+=======
+
+            this.MaximumSize = new System.Drawing.Size(640, 729);
+            this.MinimumSize = this.MaximumSize;
+
+>>>>>>> Stashed changes
             SQLserver();
         }
 
@@ -104,13 +111,35 @@ namespace RecipeOrganizer
             foreach (Recipe recipe in RecipeManager.bookmarkedRecipes)
             {
 
+<<<<<<< Updated upstream
                 if (recipe.getName().Contains(textboxString)) {
+=======
+                String recipeName = recipe.getName();
+
+                if (recipeName.IndexOf(textboxString, 0, StringComparison.OrdinalIgnoreCase) != -1)
+                {
+>>>>>>> Stashed changes
 
                     temp.Add(recipe);
                 }
-            }
+                else
+                {
+                    foreach (String tagName in recipe.getTags())
+                    {
+                        if (tagName.IndexOf(textboxString, 0, StringComparison.OrdinalIgnoreCase) != -1)
+                        {
 
+<<<<<<< Updated upstream
             displayedRecipes = temp;
+=======
+                            displayedRecipes.Add(recipe);
+                            break;
+                        }
+                    }
+                }
+
+            }
+>>>>>>> Stashed changes
         }
 
         //Click Handler
