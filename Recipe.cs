@@ -17,7 +17,7 @@ namespace RecipeOrganizer
         private DateTime prepTime;
         private String cuisine;
         private String season;
-        private Boolean bookmarked;
+        private Boolean bookmarked = false;
         private List<String> instructions = new List<String>();
         private List<String> ingredients = new List<String>();
         private List<String> recipeTags = new List<String>();
@@ -28,7 +28,7 @@ namespace RecipeOrganizer
 
         }
 
-        public Recipe(int recipeID, String recipeName, String image, DateTime prepTime, String cuisine, String season, Boolean bookmarked, List<String> instructions, List<String> ingredients, List<String> recipeTags)
+        public Recipe(int recipeID, String recipeName, String image, DateTime prepTime, String cuisine, String season, List<String> instructions, List<String> ingredients, List<String> recipeTags)
         {
             setRecipeID(recipeID);
             setName(recipeName);
@@ -90,12 +90,12 @@ namespace RecipeOrganizer
 
         public void setIngredient(int index, String ingredient)
         {
-
+            ingredients[index] = ingredient;
         }
 
         public void setPrepTime(DateTime time)
         {
-
+            prepTime = time;
         }
 
         public DateTime getPrepTime()
@@ -105,7 +105,7 @@ namespace RecipeOrganizer
 
         public void setImage(String link)
         {
-
+            image = link;
         }
 
         public String getImage()
@@ -113,9 +113,9 @@ namespace RecipeOrganizer
             return image;
         }
 
-        public void setCuisine(String cuisine)
+        public void setCuisine(String inCuisine)
         {
-
+            cuisine = inCuisine;
         }
 
         public String getCuisine()
@@ -123,9 +123,9 @@ namespace RecipeOrganizer
             return cuisine;
         }
 
-        public void setSeason(String season)
+        public void setSeason(String inSeason)
         {
-
+            season = inSeason;
         }
 
         public String getSeason()
@@ -135,7 +135,14 @@ namespace RecipeOrganizer
 
         public void toggleBookmark()
         {
-
+            if (bookmarked)
+            {
+                bookmarked = false;
+            }
+            else
+            {
+                bookmarked = true;
+            }
         }
 
         public Boolean isBookmarked()
