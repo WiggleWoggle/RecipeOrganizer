@@ -33,10 +33,17 @@ namespace RecipeOrganizer
         {
             RecipeLayoutPanel.Controls.Clear();
 
+            int displayCount = 0;
+
             foreach (Recipe recipe in displayedRecipes)
             {
+
+                displayCount++;
+
                 buildRecipe(recipe);
             }
+
+            NoResultsLabel.Text = displayCount.ToString() + " Results";
         }
 
         private void resetDisplayedToBookmarked()
@@ -120,7 +127,6 @@ namespace RecipeOrganizer
 
         private void control_Click(object sender, EventArgs e)
         {
-
             Control control = sender as Control;
 
             foreach (Panel panel in RecipeLayoutPanel.Controls)
@@ -137,7 +143,6 @@ namespace RecipeOrganizer
 
         private bool foundRecipe(Panel panel)
         {
-
             foreach (Recipe recipe in displayedRecipes)
             {
                 if (recipe.getSyncedPanel().Name.Equals(panel.Name))
@@ -154,7 +159,6 @@ namespace RecipeOrganizer
 
         private void createRecipeTab(Recipe recipe)
         {
-
             TabPage newTabPage = new TabPage(recipe.getName());
 
             if (!recipeAlreadyOpenInAnotherTab(newTabPage))
