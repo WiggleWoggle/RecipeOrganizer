@@ -27,11 +27,8 @@ namespace RecipeOrganizer
 
             newPanel.Controls.Add(createTitle(recipe));
             newPanel.Controls.Add(createTags(recipe));
-            
-            if (!recipe.isBookmarked())
-            {
-                newPanel.Controls.Add(bookmarkLabel(recipe));
-            }
+
+            newPanel.Controls.Add(bookmarkLabel(recipe));
 
             recipe.setSyncedPanel(newPanel);
 
@@ -53,20 +50,7 @@ namespace RecipeOrganizer
         {
 
             Label label = new Label();
-
-            String tags = "";
-
-            if (recipe.getTags() != null)
-            {
-                foreach (String tag in recipe.getTags())
-                {
-
-                    tags += tag + ", ";
-                }
-            }
-
-            label.Text = tags;
-
+            label.Text = "Tags: " + String.Join(", ", recipe.getTags());
             label.Font = new Font("Microsoft Sans Serif", 7);
             label.Size = new Size(300, 24);
             label.Location = new Point(2, 30);
@@ -78,7 +62,15 @@ namespace RecipeOrganizer
         {
 
             PictureBox image = new PictureBox();
-            image.Image = Resources.bookmark_icon;
+            
+            if (recipe.isBookmarked())
+            {
+                image.Image = Resources.bookmark_icon;
+            } else
+            {
+                image.Image = Resources.bookmarkiconempty;
+            }
+
             image.SizeMode = PictureBoxSizeMode.StretchImage;
             image.Size = new Size(20, 18);
             image.Location = new Point(475, 5);
@@ -88,12 +80,29 @@ namespace RecipeOrganizer
 
         //Recipe Tabs
 
-        public static void buildRecipePage(TabPage page, Recipe recipe)
+        public static RecipePage buildRecipePage(TabPage page, Recipe recipe)
         {
-            page.Controls.Add(recipeImagePreview(recipe));
-            page.Controls.Add(interactableBookmarkLabel(recipe));
+
+            PictureBox bookmarkLabel = interactableBookmarkLabel(recipe);
+            Label title = recipeTitle(recipe);
+            Label tags = recipeTags(recipe);
+            PictureBox pictureBox = recipeImagePreview(recipe);
+            Label pictureBackground = recipeImagePreviewBackground();
+            Button edit = editButton(recipe);
+
+            page.Controls.Add(bookmarkLabel);
+            page.Controls.Add(title);
+            page.Controls.Add(tags);
+
+            page.Controls.Add(pictureBox);
+            page.Controls.Add(pictureBackground);
+            page.Controls.Add(edit);
 
             page.BackColor = SystemColors.ActiveCaption;
+
+            RecipePage recipePage = new RecipePage(recipe, bookmarkLabel, title, tags, pictureBox, pictureBackground);
+
+            return recipePage;
         }
 
         private static PictureBox recipeImagePreview(Recipe recipe)
@@ -105,22 +114,76 @@ namespace RecipeOrganizer
             image.ImageLocation = recipe.getImage();
             //
             image.SizeMode = PictureBoxSizeMode.StretchImage;
-            image.Location = new Point(20, 60);
+            image.Location = new Point(20, 60 + 20);
             image.Size = new Size(200, 200);
 
             return image;
+        }
+
+        private static Label recipeImagePreviewBackground()
+        {
+
+            Label label = new Label();
+            label.BackColor = Color.Black;
+            label.Location = new Point(17, 57 + 20);
+            label.Size = new Size(206, 206);
+
+            return label;
         }
 
         private static PictureBox interactableBookmarkLabel(Recipe recipe)
         {
 
             PictureBox image = new PictureBox();
-            image.Image = Resources.bookmark_icon;
+
+            if (recipe.isBookmarked())
+            {
+                image.Image = Resources.bookmark_icon;
+            }
+            else
+            {
+                image.Image = Resources.bookmarkiconempty;
+            }
+
+            image.Name = recipe.getName() + "toggleableBookmark";
             image.SizeMode = PictureBoxSizeMode.StretchImage;
             image.Size = new Size(40, 38);
             image.Location = new Point(560, 10);
 
             return image;
+        }
+
+        private static Label recipeTitle(Recipe recipe)
+        {
+
+            Label label = new Label();
+            label.Text = recipe.getName();
+            label.Font = new Font("Microsoft Sans Serif", 24);
+            label.Size = new Size(300, 36);
+            label.Location = new Point(9, 10);
+
+            return label;
+        }
+
+        private static Label recipeTags(Recipe recipe)
+        {
+
+            Label label = new Label();
+            label.Text = "Tags: " + String.Join(", ", recipe.getTags());
+            label.Font = new Font("Microsoft Sans Serif", 12);
+            label.Size = new Size(400, 24);
+            label.Location = new Point(13, 45);
+
+            return label;
+        }
+
+        private static Button editButton(Recipe recipe)
+        {
+
+            Button editButton = new Button();
+            editButton.Text = "Edit";
+
+            return editButton;
         }
     }
 }
