@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace RecipeOrganizer
 {
@@ -52,7 +53,7 @@ namespace RecipeOrganizer
             Label label = new Label();
             label.Text = "Tags: " + String.Join(", ", recipe.getTags());
             label.Font = new Font("Microsoft Sans Serif", 7);
-            label.Size = new Size(300, 24);
+            label.Size = new Size(500, 24);
             label.Location = new Point(2, 30);
 
             return label;
@@ -83,14 +84,17 @@ namespace RecipeOrganizer
         public static RecipePage buildRecipePage(TabPage page, Recipe recipe)
         {
 
+            page.BackColor = SystemColors.ActiveCaption;
+
             FlowLayoutPanel recipePagePanel = new FlowLayoutPanel();
+            recipePagePanel.Size = new Size(617, 662);
+            recipePagePanel.Location = new Point(0, 0);
+            recipePagePanel.AutoScroll = true;
 
             page.Controls.Add(recipePagePanel);
 
             Panel newPanel = new Panel();
-            newPanel.BackColor = SystemColors.ActiveCaption;
-            newPanel.BackColor = Color.SlateGray;
-            newPanel.Size = new Size(502, 500);
+            newPanel.Size = new Size(590, 900);
 
             recipePagePanel.Controls.Add(newPanel);
 
@@ -100,6 +104,7 @@ namespace RecipeOrganizer
             PictureBox pictureBox = recipeImagePreview(recipe);
             Label pictureBackground = recipeImagePreviewBackground();
             Button edit = editButton(recipe);
+            Button delete = deleteButton(recipe);
 
             newPanel.Controls.Add(bookmarkLabel);
             newPanel.Controls.Add(title);
@@ -108,8 +113,9 @@ namespace RecipeOrganizer
             newPanel.Controls.Add(pictureBox);
             newPanel.Controls.Add(pictureBackground);
             newPanel.Controls.Add(edit);
+            newPanel.Controls.Add(delete);
 
-            newPanel.BackColor = SystemColors.ActiveCaption;
+            newPanel.Controls.Add(buildInteractableIngredients(recipe));
 
             RecipePage recipePage = new RecipePage(recipe, bookmarkLabel, title, tags, pictureBox, pictureBackground);
 
@@ -159,7 +165,7 @@ namespace RecipeOrganizer
             image.Name = recipe.getName() + "toggleableBookmark";
             image.SizeMode = PictureBoxSizeMode.StretchImage;
             image.Size = new Size(40, 38);
-            image.Location = new Point(560, 10);
+            image.Location = new Point(15, 10);
 
             return image;
         }
@@ -170,8 +176,8 @@ namespace RecipeOrganizer
             Label label = new Label();
             label.Text = recipe.getName();
             label.Font = new Font("Microsoft Sans Serif", 24);
-            label.Size = new Size(300, 36);
-            label.Location = new Point(9, 10);
+            label.Size = new Size(400, 40);
+            label.Location = new Point(55, 14);
 
             return label;
         }
@@ -181,9 +187,9 @@ namespace RecipeOrganizer
 
             Label label = new Label();
             label.Text = "Tags: " + String.Join(", ", recipe.getTags());
-            label.Font = new Font("Microsoft Sans Serif", 12);
+            label.Font = new Font("Microsoft Sans Serif", 8);
             label.Size = new Size(400, 24);
-            label.Location = new Point(13, 45);
+            label.Location = new Point(13, 55);
 
             return label;
         }
@@ -193,8 +199,34 @@ namespace RecipeOrganizer
 
             Button editButton = new Button();
             editButton.Text = "Edit";
+            editButton.Location = new Point(480, 20);
+            editButton.Size = new Size(40, 23);
+            editButton.UseVisualStyleBackColor = true;
 
             return editButton;
+        }
+
+        private static Button deleteButton(Recipe recipe)
+        {
+
+            Button deleteButton = new Button();
+            deleteButton.Text = "Delete";
+            deleteButton.Location = new Point(520, 20);
+            deleteButton.Size = new Size(60, 23);
+            deleteButton.UseVisualStyleBackColor = true;
+
+            return deleteButton;
+        }
+
+        private static TextBox buildInteractableIngredients(Recipe recipe)
+        {
+            TextBox box = new TextBox();
+            box.Location = new Point(20, 400);
+            box.ReadOnly = true;
+            box.Enabled = false;
+            box.Text = "Ingredient Ex";
+
+            return box;
         }
     }
 }

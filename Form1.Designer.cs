@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
             this.Home = new System.Windows.Forms.TabPage();
+            this.importButton = new System.Windows.Forms.Button();
+            this.refreshButton = new System.Windows.Forms.Button();
             this.returnToHomeButton = new System.Windows.Forms.Button();
             this.searchButton = new System.Windows.Forms.Button();
             this.NoResultsLabel = new System.Windows.Forms.Label();
@@ -40,7 +42,6 @@
             this.SearchInputText = new System.Windows.Forms.TextBox();
             this.RecipeTabControl = new System.Windows.Forms.TabControl();
             this.button2 = new System.Windows.Forms.Button();
-            this.refreshButton = new System.Windows.Forms.Button();
             this.Home.SuspendLayout();
             this.RecipeTabControl.SuspendLayout();
             this.SuspendLayout();
@@ -55,6 +56,7 @@
             // Home
             // 
             this.Home.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Home.Controls.Add(this.importButton);
             this.Home.Controls.Add(this.refreshButton);
             this.Home.Controls.Add(this.returnToHomeButton);
             this.Home.Controls.Add(this.searchButton);
@@ -69,6 +71,26 @@
             this.Home.Size = new System.Drawing.Size(617, 662);
             this.Home.TabIndex = 1;
             this.Home.Text = "Home (Bookmarks)";
+            // 
+            // importButton
+            // 
+            this.importButton.Location = new System.Drawing.Point(594, 45);
+            this.importButton.Name = "importButton";
+            this.importButton.Size = new System.Drawing.Size(23, 23);
+            this.importButton.TabIndex = 15;
+            this.importButton.Text = "↓";
+            this.importButton.UseVisualStyleBackColor = true;
+            this.importButton.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // refreshButton
+            // 
+            this.refreshButton.Location = new System.Drawing.Point(594, 19);
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(23, 23);
+            this.refreshButton.TabIndex = 14;
+            this.refreshButton.Text = "↻";
+            this.refreshButton.UseVisualStyleBackColor = true;
+            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
             // 
             // returnToHomeButton
             // 
@@ -89,7 +111,7 @@
             this.searchButton.Size = new System.Drawing.Size(58, 23);
             this.searchButton.TabIndex = 12;
             this.searchButton.Text = "Search";
-            this.searchButton.UseVisualStyleBackColor = false;
+            this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // NoResultsLabel
@@ -156,16 +178,6 @@
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // refreshButton
-            // 
-            this.refreshButton.Location = new System.Drawing.Point(594, 19);
-            this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(23, 23);
-            this.refreshButton.TabIndex = 14;
-            this.refreshButton.Text = "↻";
-            this.refreshButton.UseVisualStyleBackColor = true;
-            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -199,6 +211,7 @@
         private System.Windows.Forms.Button returnToHomeButton;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button refreshButton;
+        private System.Windows.Forms.Button importButton;
     }
 }
 

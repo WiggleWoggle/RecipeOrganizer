@@ -21,7 +21,6 @@ namespace RecipeOrganizer
         private List<String> instructions = new List<String>();
         private List<String> ingredients = new List<String>();
         private List<String> recipeTags = new List<String>();
-        private List<String> hiddenTags = new List<String> { "All", "Recipes", "Recipe"};
         private Panel syncedRecipePanel;
 
         public Recipe()
@@ -185,12 +184,6 @@ namespace RecipeOrganizer
         {
 
             return recipeTags;
-        }
-
-        public List<String> getHiddenTags()
-        {
-
-            return hiddenTags;
         }
 
         public void setSyncedPanel(Panel panel)

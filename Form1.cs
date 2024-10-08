@@ -139,6 +139,7 @@ namespace RecipeOrganizer
             {
                 returnToHomeButton.Visible = true;
                 NoBookmarksLabel.Visible = false;
+                importButton.Visible = false;
                 ResultsLabel.Visible = true;
                 NoResultsLabel.Visible = true;
                 refreshButton.Visible = false;
@@ -148,6 +149,7 @@ namespace RecipeOrganizer
             {
                 SearchInputText.Text = "";
                 returnToHomeButton.Visible = false;
+                importButton.Visible = true;
                 NoBookmarksLabel.Visible = true;
                 ResultsLabel.Visible = false;
                 NoResultsLabel.Visible = false;
@@ -157,6 +159,23 @@ namespace RecipeOrganizer
             }
         }
 
+        private bool foundRecipe(Panel panel)
+        {
+            foreach (Recipe recipe in displayedRecipes)
+            {
+                if (recipe.getSyncedPanel().Name.Equals(panel.Name))
+                {
+
+                    createRecipeTab(recipe);
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        //Recipe Display
         private void updateDisplayedRecipes(String textboxString)
         {
 
@@ -166,6 +185,7 @@ namespace RecipeOrganizer
 
             foreach (Recipe recipe in RecipeManager.recipes)
             {
+
                 String recipeName = recipe.getName();
                 if (recipeName.IndexOf(textboxString, 0, StringComparison.OrdinalIgnoreCase) != -1)
                 {
@@ -174,16 +194,6 @@ namespace RecipeOrganizer
                 }
                 else
                 {
-                    foreach (String tagName in recipe.getHiddenTags())
-                    {
-                        if (tagName.IndexOf(textboxString, 0, StringComparison.OrdinalIgnoreCase) != -1)
-                        {
-
-                            displayedRecipes.Add(recipe);
-                            break;
-                        }
-                    }
-
                     foreach (String tagName in recipe.getTags())
                     {
                         if (tagName.IndexOf(textboxString, 0, StringComparison.OrdinalIgnoreCase) != -1)
@@ -248,22 +258,8 @@ namespace RecipeOrganizer
                 }
             }
         }
-
-        private bool foundRecipe(Panel panel)
-        {
-            foreach (Recipe recipe in displayedRecipes)
-            {
-                if (recipe.getSyncedPanel().Name.Equals(panel.Name))
-                {
-
-                    createRecipeTab(recipe);
-
-                    return true;
-                }
-            }
-
-            return false;
-        }
+        
+        //Recipe Tab
 
         private void createRecipeTab(Recipe recipe)
         {
@@ -320,9 +316,6 @@ namespace RecipeOrganizer
             return panel;
         }
 
-
-        
-
         //SQL Server Methods
 
         private void SQLserver()
@@ -350,5 +343,16 @@ namespace RecipeOrganizer
                 System.Diagnostics.Debug.WriteLine("An error occurred: " + ex.Message);
             }
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Select Recipe File";
+            dialog.InitialDirectory = @"C:\";
+            dialog.Filter = "Text File (*.txt)|*.txt";
+            dialog.FilterIndex = 1;
+            dialog.ShowDialog();
+        }
+
     }
 }
