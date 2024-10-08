@@ -174,6 +174,16 @@ namespace RecipeOrganizer
                 }
                 else
                 {
+                    foreach (String tagName in recipe.getHiddenTags())
+                    {
+                        if (tagName.IndexOf(textboxString, 0, StringComparison.OrdinalIgnoreCase) != -1)
+                        {
+
+                            displayedRecipes.Add(recipe);
+                            break;
+                        }
+                    }
+
                     foreach (String tagName in recipe.getTags())
                     {
                         if (tagName.IndexOf(textboxString, 0, StringComparison.OrdinalIgnoreCase) != -1)

@@ -83,6 +83,17 @@ namespace RecipeOrganizer
         public static RecipePage buildRecipePage(TabPage page, Recipe recipe)
         {
 
+            FlowLayoutPanel recipePagePanel = new FlowLayoutPanel();
+
+            page.Controls.Add(recipePagePanel);
+
+            Panel newPanel = new Panel();
+            newPanel.BackColor = SystemColors.ActiveCaption;
+            newPanel.BackColor = Color.SlateGray;
+            newPanel.Size = new Size(502, 500);
+
+            recipePagePanel.Controls.Add(newPanel);
+
             PictureBox bookmarkLabel = interactableBookmarkLabel(recipe);
             Label title = recipeTitle(recipe);
             Label tags = recipeTags(recipe);
@@ -90,15 +101,15 @@ namespace RecipeOrganizer
             Label pictureBackground = recipeImagePreviewBackground();
             Button edit = editButton(recipe);
 
-            page.Controls.Add(bookmarkLabel);
-            page.Controls.Add(title);
-            page.Controls.Add(tags);
+            newPanel.Controls.Add(bookmarkLabel);
+            newPanel.Controls.Add(title);
+            newPanel.Controls.Add(tags);
 
-            page.Controls.Add(pictureBox);
-            page.Controls.Add(pictureBackground);
-            page.Controls.Add(edit);
+            newPanel.Controls.Add(pictureBox);
+            newPanel.Controls.Add(pictureBackground);
+            newPanel.Controls.Add(edit);
 
-            page.BackColor = SystemColors.ActiveCaption;
+            newPanel.BackColor = SystemColors.ActiveCaption;
 
             RecipePage recipePage = new RecipePage(recipe, bookmarkLabel, title, tags, pictureBox, pictureBackground);
 
