@@ -115,9 +115,18 @@ namespace RecipeOrganizer
             newPanel.Controls.Add(edit);
             newPanel.Controls.Add(delete);
 
-            newPanel.Controls.Add(buildInteractableIngredients(recipe));
+            newPanel.Controls.Add(ingredientsLabel(recipe));
 
-            RecipePage recipePage = new RecipePage(recipe, bookmarkLabel, title, tags, pictureBox, pictureBackground);
+            List<TextBox> ingredientsBoxes = buildInteractableIngredients(recipe);
+
+            foreach (TextBox box in ingredientsBoxes)
+            {
+                newPanel.Controls.Add(box);
+            }
+
+            RecipePage recipePage = new RecipePage(recipe, bookmarkLabel, title, tags, pictureBox, pictureBackground, ingredientsBoxes, edit, newPanel);
+
+            RecipeManager.pages.Add(recipePage);
 
             return recipePage;
         }
@@ -218,13 +227,43 @@ namespace RecipeOrganizer
             return deleteButton;
         }
 
-        private static TextBox buildInteractableIngredients(Recipe recipe)
+        private static Label ingredientsLabel(Recipe recipe)
+        {
+
+            Label label = new Label();
+            label.Text = "Ingredients";
+            label.Font = new Font("Microsoft Sans Serif", 15);
+            label.Size = new Size(400, 40);
+            label.Location = new Point(12, 290);
+
+            return label;
+        }
+
+        private static List<TextBox> buildInteractableIngredients(Recipe recipe)
+        {
+            List<TextBox> interactables = new List<TextBox>();
+
+            int additive = 0;
+
+            foreach (String ingredient in recipe.getIngredients())
+            {
+                interactables.Add(placeInteractableIngredient(recipe, ingredient, additive));
+                additive += 30;
+            }
+
+            return interactables;
+        }
+
+        private static TextBox placeInteractableIngredient(Recipe recipe, String ingredient, int additive)
         {
             TextBox box = new TextBox();
-            box.Location = new Point(20, 400);
+            box.Location = new Point(16, (330 + additive));
+            box.Size = new Size(300, 40);
+            box.BackColor = SystemColors.ActiveCaption;
+            box.BorderStyle = BorderStyle.None;
             box.ReadOnly = true;
             box.Enabled = false;
-            box.Text = "Ingredient Ex";
+            box.Text = ingredient;
 
             return box;
         }

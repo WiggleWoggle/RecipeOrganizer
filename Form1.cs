@@ -210,7 +210,6 @@ namespace RecipeOrganizer
         //Click Handler
         private void recipe_Click(object sender, EventArgs e)
         {
-
             Panel panel = sender as Panel;
 
             if (!foundRecipe(panel))
@@ -258,7 +257,29 @@ namespace RecipeOrganizer
                 }
             }
         }
-        
+
+        private void editButton_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+
+            foreach (RecipePage page in RecipeManager.pages)
+            {
+                if (page.getEditButton().Equals(button))
+                {
+
+                    button.Visible = false;
+
+                    foreach (TextBox ingredientBox in page.getEditableIngredientsTextBoxes())
+                    {
+                        ingredientBox.BackColor = Color.White;
+                        ingredientBox.BorderStyle = BorderStyle.Fixed3D;
+                        ingredientBox.ReadOnly = false;
+                        ingredientBox.Enabled = true;
+                    }
+                }
+            }
+        }
+
         //Recipe Tab
 
         private void createRecipeTab(Recipe recipe)
@@ -274,6 +295,7 @@ namespace RecipeOrganizer
                 PictureBox bookmarkLabel = recipePage.getBookmarkPicture();
 
                 bookmarkLabel.Click += bookmark_Toggle_Click;
+                recipePage.getEditButton().Click += editButton_Click;
 
                 RecipeTabControl.SelectedTab = newTabPage;
             }

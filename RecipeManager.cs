@@ -15,6 +15,8 @@ namespace RecipeOrganizer
         //TODO: populate this list with bookmarked recipes saved in the sql server
         public static List<Recipe> bookmarkedRecipes = new List<Recipe>();
 
+        public static List<RecipePage> pages = new List<RecipePage>();
+
         public static void addRecipe(Recipe recipe)
         {
             recipes.Add(recipe);
@@ -34,7 +36,7 @@ namespace RecipeOrganizer
         {
 
             //Korean
-            recipes.Add(new Recipe(1, "Bulgogi", "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F43%2F2023%2F01%2F30%2F246172-Easy-Bulgogi-ddmfs-104-4x3-1.jpg&q=60&c=sc&poi=auto&orient=true&h=512", new DateTime(), "Korean", "Any", new List<String>(), new List<String>(), new List<String> { "Korea", "Korean", "Korean Food", "Beef", "Barbeque", "Barbecue" }));
+            recipes.Add(new Recipe(1, "Bulgogi", "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F43%2F2023%2F01%2F30%2F246172-Easy-Bulgogi-ddmfs-104-4x3-1.jpg&q=60&c=sc&poi=auto&orient=true&h=512", new DateTime(), "Korean", "Any", new List<String>(), new List<String>{"1/3 Cup Soy Sauce", "2 Green Onions", "1/4 Yellow Onion", "3 Tablespoons White Sugar", "3 Cloves Garlic Minced", "2 Tablespoons Toasted Seasame Seeds", "1 Tablespoon Seasame Oil", "1/4 Tablespoon Korean Red Pepper Flakes", "1/4 Teaspoon Minced Fresh Ginger", "1/8 Teaspoon Ground Black Pepper", "1 1/2 Pound Sterloin Steak", "1 Teaspoon Honey"}, new List<String> { "Korea", "Korean", "Korean Food", "Beef", "Barbeque", "Barbecue" }));
             recipes.Add(new Recipe(2, "Bibimbap", "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F43%2F2022%2F08%2F26%2F228240-BibimbapKoreanRiceWithMixedVegtables-ddmfs-4X3-0667.jpg&q=60&c=sc&poi=auto&orient=true&h=512", new DateTime(), "Korean", "Any", new List<String>(), new List<String>(), new List<String> { "Korea", "Korean", "Korean Food", "Vegetables", "Rice", "Eggs", "Beef" }));
             recipes.Add(new Recipe(3, "Tteok-bokki", "https://futuredish.com/wp-content/uploads/Tteokbokki-3a.jpg", new DateTime(), "Korean", "Any", new List<String>(), new List<String>(), new List<String> { "Korea", "Korean", "Korean Food", "Spicy" }));
             

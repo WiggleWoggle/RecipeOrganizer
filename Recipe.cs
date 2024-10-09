@@ -88,6 +88,11 @@ namespace RecipeOrganizer
             return " ";
         }
 
+        public List<String> getIngredients()
+        {
+            return ingredients;
+        }
+
         public void setIngredient(int index, String ingredient)
         {
             ingredients[index] = ingredient;

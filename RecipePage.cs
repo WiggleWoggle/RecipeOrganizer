@@ -17,13 +17,17 @@ namespace RecipeOrganizer
         private Label recipeTags;
         private PictureBox recipeImagePreview;
         private Label recipeImagePreviewBackground;
+        private Button editButton;
+        private List<TextBox> editableIngredients = new List<TextBox>();
+        private Panel pagePanel;
+        private bool pageInEditing;
 
         public RecipePage()
         {
 
         }
 
-        public RecipePage(Recipe associatedRecipe, PictureBox bookmark, Label title, Label tags, PictureBox imagePreview, Label imageBackground)
+        public RecipePage(Recipe associatedRecipe, PictureBox bookmark, Label title, Label tags, PictureBox imagePreview, Label imageBackground, List<TextBox> boxes, Button button, Panel panel)
         {
             recipe = associatedRecipe;
             bookmarkPicture = bookmark;
@@ -31,6 +35,11 @@ namespace RecipeOrganizer
             recipeTags = tags;
             recipeImagePreview = imagePreview;
             recipeImagePreviewBackground = imageBackground;
+            editButton = button;
+            editableIngredients = boxes;
+            pagePanel = panel;
+
+            pageInEditing = false;
         }
 
         public Recipe getRecipe()
@@ -60,6 +69,26 @@ namespace RecipeOrganizer
         public Label getImagePreviewBackground()
         {
             return recipeImagePreviewBackground;
+        }
+
+        public List<TextBox> getEditableIngredientsTextBoxes() 
+        {
+            return editableIngredients; 
+        }
+
+        public Button getEditButton()
+        {
+            return editButton;
+        }
+
+        public void setPageInEditing(bool editing)
+        {
+            pageInEditing = editing;
+        }
+
+        public bool getPageInEditing()
+        {
+            return pageInEditing;
         }
     }
 }
