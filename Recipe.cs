@@ -17,7 +17,7 @@ namespace RecipeOrganizer
         private DateTime prepTime;
         private String cuisine;
         private String season;
-        private Boolean bookmarked = false;
+        private bool bookmarked = false;
         private List<String> instructions = new List<String>();
         private List<String> ingredients = new List<String>();
         private List<String> recipeTags = new List<String>();
@@ -96,6 +96,11 @@ namespace RecipeOrganizer
         public void setIngredient(int index, String ingredient)
         {
             ingredients[index] = ingredient;
+        }
+
+        public void setIngredients(List<String> newIngredients)
+        {
+            ingredients = newIngredients;   
         }
 
         public void setPrepTime(DateTime time)

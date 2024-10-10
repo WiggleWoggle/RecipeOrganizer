@@ -18,8 +18,12 @@ namespace RecipeOrganizer
         private PictureBox recipeImagePreview;
         private Label recipeImagePreviewBackground;
         private Button editButton;
+        private Button doneButton;
+        private Button exitButton;
+        private Button addIngredientButton;
         private List<TextBox> editableIngredients = new List<TextBox>();
         private Panel pagePanel;
+        private TabPage tabPage;
         private bool pageInEditing;
 
         public RecipePage()
@@ -81,6 +85,46 @@ namespace RecipeOrganizer
             return editButton;
         }
 
+        public void setDoneButton(Button button)
+        {
+            doneButton = button;
+        }
+
+        public Button getDoneButton()
+        {
+            return doneButton;
+        }
+
+        public void setExitButton(Button button)
+        {
+            exitButton = button;
+        }
+
+        public Button getExitButton()
+        {
+            return exitButton;
+        }
+
+        public void setTabPage(TabPage page)
+        {
+            tabPage = page;
+        }
+
+        public TabPage getTabPage()
+        {
+            return tabPage;
+        }
+
+        public void setAddIngredientButton(Button button)
+        {
+            addIngredientButton = button;
+        }
+
+        public Button getAddIngredientButton()
+        {
+            return addIngredientButton;
+        }
+
         public void setPageInEditing(bool editing)
         {
             pageInEditing = editing;
@@ -89,6 +133,11 @@ namespace RecipeOrganizer
         public bool getPageInEditing()
         {
             return pageInEditing;
+        }
+
+        public Panel getPagePanel()
+        {
+            return pagePanel;
         }
     }
 }

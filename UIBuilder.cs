@@ -15,6 +15,8 @@ namespace RecipeOrganizer
     internal class UIBuilder
     {
 
+        private static int pageUIAdditive = 0;
+
         //Homepage
 
         public static Panel buildHomePagePanel(Recipe recipe)
@@ -84,6 +86,8 @@ namespace RecipeOrganizer
         public static RecipePage buildRecipePage(TabPage page, Recipe recipe)
         {
 
+            pageUIAdditive = 0;
+
             page.BackColor = SystemColors.ActiveCaption;
 
             FlowLayoutPanel recipePagePanel = new FlowLayoutPanel();
@@ -104,6 +108,8 @@ namespace RecipeOrganizer
             PictureBox pictureBox = recipeImagePreview(recipe);
             Label pictureBackground = recipeImagePreviewBackground();
             Button edit = editButton(recipe);
+            Button exit = exitButton(recipe);
+            Button done = doneEditingButton(recipe);
             Button delete = deleteButton(recipe);
 
             newPanel.Controls.Add(bookmarkLabel);
@@ -113,6 +119,8 @@ namespace RecipeOrganizer
             newPanel.Controls.Add(pictureBox);
             newPanel.Controls.Add(pictureBackground);
             newPanel.Controls.Add(edit);
+            newPanel.Controls.Add(done);
+            newPanel.Controls.Add(exit);
             newPanel.Controls.Add(delete);
 
             newPanel.Controls.Add(ingredientsLabel(recipe));
@@ -124,7 +132,17 @@ namespace RecipeOrganizer
                 newPanel.Controls.Add(box);
             }
 
+            Button add = addIngredientButton(recipe);
+            newPanel.Controls.Add(add);
+
+            add.Visible = false;
+            done.Visible = false;
+
             RecipePage recipePage = new RecipePage(recipe, bookmarkLabel, title, tags, pictureBox, pictureBackground, ingredientsBoxes, edit, newPanel);
+            recipePage.setDoneButton(done);
+            recipePage.setExitButton(exit);
+            recipePage.setAddIngredientButton(add);
+            recipePage.setTabPage(page);
 
             RecipeManager.pages.Add(recipePage);
 
@@ -140,7 +158,7 @@ namespace RecipeOrganizer
             image.ImageLocation = recipe.getImage();
             //
             image.SizeMode = PictureBoxSizeMode.StretchImage;
-            image.Location = new Point(20, 60 + 20);
+            image.Location = new Point(20, 82);
             image.Size = new Size(200, 200);
 
             return image;
@@ -151,8 +169,8 @@ namespace RecipeOrganizer
 
             Label label = new Label();
             label.BackColor = Color.Black;
-            label.Location = new Point(17, 57 + 20);
-            label.Size = new Size(206, 206);
+            label.Location = new Point(17, 77);
+            label.Size = new Size(206, 208);
 
             return label;
         }
@@ -185,7 +203,7 @@ namespace RecipeOrganizer
             Label label = new Label();
             label.Text = recipe.getName();
             label.Font = new Font("Microsoft Sans Serif", 24);
-            label.Size = new Size(400, 40);
+            label.Size = new Size(380, 40);
             label.Location = new Point(55, 14);
 
             return label;
@@ -208,11 +226,35 @@ namespace RecipeOrganizer
 
             Button editButton = new Button();
             editButton.Text = "Edit";
-            editButton.Location = new Point(480, 20);
+            editButton.Location = new Point(460, 20);
             editButton.Size = new Size(40, 23);
             editButton.UseVisualStyleBackColor = true;
 
             return editButton;
+        }
+
+        private static Button doneEditingButton(Recipe recipe)
+        {
+
+            Button doneEditingButton = new Button();
+            doneEditingButton.Text = "Done";
+            doneEditingButton.Location = new Point(450, 20);
+            doneEditingButton.Size = new Size(50, 23);
+            doneEditingButton.UseVisualStyleBackColor = true;
+
+            return doneEditingButton;
+        }
+
+        private static Button addIngredientButton(Recipe recipe)
+        {
+
+            Button addButton = new Button();
+            addButton.Text = "+";
+            addButton.Location = new Point(15, (330 + pageUIAdditive));
+            addButton.Size = new Size(23, 23);
+            addButton.UseVisualStyleBackColor = true;
+
+            return addButton;
         }
 
         private static Button deleteButton(Recipe recipe)
@@ -220,8 +262,20 @@ namespace RecipeOrganizer
 
             Button deleteButton = new Button();
             deleteButton.Text = "Delete";
-            deleteButton.Location = new Point(520, 20);
+            deleteButton.Location = new Point(500, 20);
             deleteButton.Size = new Size(60, 23);
+            deleteButton.UseVisualStyleBackColor = true;
+
+            return deleteButton;
+        }
+
+        private static Button exitButton(Recipe recipe)
+        {
+
+            Button deleteButton = new Button();
+            deleteButton.Text = "X";
+            deleteButton.Location = new Point(560, 20);
+            deleteButton.Size = new Size(23, 23);
             deleteButton.UseVisualStyleBackColor = true;
 
             return deleteButton;
@@ -243,12 +297,10 @@ namespace RecipeOrganizer
         {
             List<TextBox> interactables = new List<TextBox>();
 
-            int additive = 0;
-
             foreach (String ingredient in recipe.getIngredients())
             {
-                interactables.Add(placeInteractableIngredient(recipe, ingredient, additive));
-                additive += 30;
+                interactables.Add(placeInteractableIngredient(recipe, ingredient, pageUIAdditive));
+                pageUIAdditive += 30;
             }
 
             return interactables;
