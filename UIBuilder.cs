@@ -108,6 +108,7 @@ namespace RecipeOrganizer
             PictureBox pictureBox = recipeImagePreview(recipe);
             Label pictureBackground = recipeImagePreviewBackground();
             Button edit = editButton(recipe);
+            Button export = importButton(recipe);
             Button exit = exitButton(recipe);
             Button done = doneEditingButton(recipe);
             Button delete = deleteButton(recipe);
@@ -119,6 +120,7 @@ namespace RecipeOrganizer
             newPanel.Controls.Add(pictureBox);
             newPanel.Controls.Add(pictureBackground);
             newPanel.Controls.Add(edit);
+            newPanel.Controls.Add(export);
             newPanel.Controls.Add(done);
             newPanel.Controls.Add(exit);
             newPanel.Controls.Add(delete);
@@ -159,6 +161,7 @@ namespace RecipeOrganizer
             recipePage.setAddInstructionButton(addInstruction);
             recipePage.setTabPage(page);
             recipePage.setPrepTimeBox(editableDate);
+            recipePage.setExportButton(export);
 
             addIngredient.Visible = false;
             addInstruction.Visible = false;
@@ -304,6 +307,18 @@ namespace RecipeOrganizer
             return deleteButton;
         }
 
+        private static Button importButton(Recipe recipe)
+        {
+
+            Button importButton = new Button();
+            importButton.Text = "↑";
+            importButton.Location = new Point(560, 50);
+            importButton.Size = new Size(23, 23);
+            importButton.UseVisualStyleBackColor = true;
+
+            return importButton;
+        }
+
         private static Label ingredientsLabel(Recipe recipe)
         {
 
@@ -336,7 +351,6 @@ namespace RecipeOrganizer
             foreach (String instruction in recipe.getInstructions())
             {
                 interactables.Add(placeInteractableInstruction(recipe, instruction, pageUIAdditive));
-                pageUIAdditive += 30;
             }
 
             return interactables;
@@ -360,12 +374,22 @@ namespace RecipeOrganizer
         {
             TextBox box = new TextBox();
             box.Location = new Point(16, (330 + additive));
-            box.Size = new Size(300, 60);
+            box.Size = new Size(300, 40);
             box.BackColor = SystemColors.ActiveCaption;
             box.BorderStyle = BorderStyle.None;
             box.ReadOnly = true;
+            box.AutoSize = false;
+            box.WordWrap = true;
             box.Enabled = false;
+            box.Multiline = true;
+                   
             box.Text = instruction;
+
+            int height = box.GetLineFromCharIndex(int.MaxValue) + 1;
+            
+            box.Size = new Size(300, height * 18);
+
+            pageUIAdditive += height * 18;
 
             return box;
         }

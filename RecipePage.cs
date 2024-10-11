@@ -17,6 +17,7 @@ namespace RecipeOrganizer
         private Label recipeTags;
         private PictureBox recipeImagePreview;
         private Label recipeImagePreviewBackground;
+        private Button exportButton;
         private Button editButton;
         private Button doneButton;
         private Button exitButton;
@@ -173,6 +174,16 @@ namespace RecipeOrganizer
         public bool getPageInEditing()
         {
             return pageInEditing;
+        }
+
+        public void setExportButton(Button button)
+        {
+            exportButton = button;
+        }
+
+        public Button getExportButton()
+        {
+            return exportButton;
         }
 
         public Panel getPagePanel()

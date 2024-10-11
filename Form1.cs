@@ -399,6 +399,31 @@ namespace RecipeOrganizer
             RecipeManager.pages = temp;
         }
 
+        private void exportButton_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+
+            List<RecipePage> temp = RecipeManager.pages;
+
+            foreach (RecipePage page in RecipeManager.pages)
+            {
+                if (page.getExportButton().Equals(button))
+                {
+                    if (page.getPageInEditing() == false)
+                    {
+                        page.getRecipe().exportRecipe();
+                        TextRecipeReader.exportRecipeToFile(page.getRecipe());
+                    }
+                    else
+                    {
+                        DialogResult error = MessageBox.Show("Cannot export recipe while being edited.", "Cannot Export Recipe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                    break;
+                }
+            }
+        }
+
         private void deleteButton_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
@@ -535,6 +560,7 @@ namespace RecipeOrganizer
                 recipePage.getDoneButton().Click += doneButton_Click;
                 recipePage.getExitButton().Click += exitButton_Click;
                 recipePage.getDeleteButton().Click += deleteButton_Click;
+                recipePage.getExportButton().Click += exportButton_Click;
                 recipePage.getAddIngredientButton().Click += addIngredientsButton_Click;
                 recipePage.getAddInstructionButton().Click += addInstructionsButton_Click;
 
