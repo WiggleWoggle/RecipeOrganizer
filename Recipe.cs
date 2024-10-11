@@ -14,7 +14,7 @@ namespace RecipeOrganizer
         private int recipeID;
         private String recipeName;
         private String image;
-        private DateTime prepTime;
+        private String prepTime;
         private String cuisine;
         private String season;
         private bool bookmarked = false;
@@ -28,7 +28,7 @@ namespace RecipeOrganizer
 
         }
 
-        public Recipe(int recipeID, String recipeName, String image, DateTime prepTime, String cuisine, String season, List<String> instructions, List<String> ingredients, List<String> recipeTags)
+        public Recipe(int recipeID, String recipeName, String image, String prepTime, String cuisine, String season, List<String> instructions, List<String> ingredients, List<String> recipeTags)
         {
             setRecipeID(recipeID);
             setName(recipeName);
@@ -93,6 +93,16 @@ namespace RecipeOrganizer
             return ingredients;
         }
 
+        public List<String> getInstructions()
+        {
+            return instructions;
+        }
+
+        public void setInstructions(List<String> newInstructions)
+        {
+            instructions = newInstructions;
+        }
+
         public void setIngredient(int index, String ingredient)
         {
             ingredients[index] = ingredient;
@@ -103,12 +113,12 @@ namespace RecipeOrganizer
             ingredients = newIngredients;   
         }
 
-        public void setPrepTime(DateTime time)
+        public void setPrepTime(String time)
         {
             prepTime = time;
         }
 
-        public DateTime getPrepTime()
+        public String getPrepTime()
         {
             return prepTime;
         }

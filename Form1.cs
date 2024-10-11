@@ -249,7 +249,8 @@ namespace RecipeOrganizer
                         recipe.toggleBookmark();
                         control.Image = Resources.bookmarkiconempty;
                         RecipeManager.bookmarkedRecipes.Remove(recipe);
-                    } else
+                    }
+                    else
                     {
                         recipe.toggleBookmark();
                         control.Image = Resources.bookmark_icon;
@@ -287,6 +288,7 @@ namespace RecipeOrganizer
                     cloned.getIngredients().Clear();
 
                     List<String> newIngredients = new List<String>();
+                    List<String> newInstructions = new List<String>();
 
                     foreach (TextBox ingredientBox in page.getEditableIngredientsTextBoxes())
                     {
@@ -298,13 +300,29 @@ namespace RecipeOrganizer
                         newIngredients.Add(ingredientBox.Text);
                     }
 
+                    foreach (TextBox instructionBox in page.getEditableInstructionsTextBoxes())
+                    {
+                        instructionBox.BackColor = SystemColors.ActiveCaption;
+                        instructionBox.BorderStyle = BorderStyle.None;
+                        instructionBox.ReadOnly = true;
+                        instructionBox.Enabled = false;
+
+                        newInstructions.Add(instructionBox.Text);
+                    }
+
+                    page.getPrepTimeBox().ReadOnly = true;
+                    page.getPrepTimeBox().Enabled = false;
+
+                    cloned.setPrepTime(page.getPrepTimeBox().Text);
                     cloned.setIngredients(newIngredients);
+                    cloned.setInstructions(newInstructions);
 
                     RecipeManager.recipes.Add(cloned);
 
                     page.setPageInEditing(false);
 
                     page.getAddIngredientButton().Visible = false;
+                    page.getAddInstructionButton().Visible = false;
                     page.getEditButton().Visible = true;
 
                     page.getTabPage().Text = cloned.getName();
@@ -331,9 +349,23 @@ namespace RecipeOrganizer
                         ingredientBox.Enabled = true;
                     }
 
+                    foreach (TextBox instructionBox in page.getEditableInstructionsTextBoxes())
+                    {
+                        instructionBox.BackColor = Color.White;
+                        instructionBox.BorderStyle = BorderStyle.Fixed3D;
+                        instructionBox.ReadOnly = false;
+                        instructionBox.Enabled = true;
+                    }
+
+                    page.getPrepTimeBox().BackColor = Color.White;
+                    page.getPrepTimeBox().BorderStyle = BorderStyle.Fixed3D;
+                    page.getPrepTimeBox().ReadOnly = false;
+                    page.getPrepTimeBox().Enabled = true;
+
                     page.setPageInEditing(true);
 
                     page.getAddIngredientButton().Visible = true;
+                    page.getAddInstructionButton().Visible = true;
                     page.getDoneButton().Visible = true;
 
                     page.getTabPage().Text = page.getRecipe().getName() + " (Editing)";
@@ -367,7 +399,44 @@ namespace RecipeOrganizer
             RecipeManager.pages = temp;
         }
 
-        private void addButton_Click(object sender, EventArgs e)
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+
+            List<RecipePage> temp = RecipeManager.pages;
+
+            foreach (RecipePage page in RecipeManager.pages)
+            {
+                if (page.getDeleteButton().Equals(button))
+                {
+                    if (page.getPageInEditing() == false)
+                    {
+
+                        DialogResult confirmDelete = MessageBox.Show("Are you sure you want to delete this recipe?", "Deleting Recipe", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                        if (confirmDelete == DialogResult.Yes)
+                        {
+                            RecipeTabControl.TabPages.Remove(RecipeTabControl.SelectedTab);
+                            RecipeManager.recipes.Remove(page.getRecipe());
+                            temp.Remove(page);
+
+                            RecipeLayoutPanel.Controls.Clear();
+                            updateDisplayedRecipes("");
+                            displayRecipes();
+                        }
+                    } else
+                    {
+                        DialogResult error = MessageBox.Show("Cannot delete recipe while being edited.", "Cannot Delete Recipe Page", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                    break;
+                }
+            }
+
+            RecipeManager.pages = temp;
+        }
+
+        private void addIngredientsButton_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
 
@@ -397,6 +466,49 @@ namespace RecipeOrganizer
                     RecipeManager.recipes.Add(cloned);
 
                     recipeToBuild = cloned;
+
+                    RecipeTabControl.TabPages.Remove(page.getTabPage());
+                }
+            }
+
+            if (recipeToBuild != null)
+            {
+                createRecipeTab(recipeToBuild);
+            }
+        }
+
+        private void addInstructionsButton_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+
+            List<RecipePage> temp = RecipeManager.pages;
+            Recipe recipeToBuild = null;
+
+            foreach (RecipePage page in RecipeManager.pages)
+            {
+                if (page.getAddInstructionButton().Equals(button))
+                {
+                    Recipe cloned = page.getRecipe();
+                    List<String> instructions = cloned.getInstructions();
+                    instructions.Add("New Instruction");
+
+                    List<Recipe> newRecipes = RecipeManager.recipes;
+
+                    foreach (Recipe recipe in RecipeManager.recipes)
+                    {
+                        if (recipe.Equals(cloned))
+                        {
+                            newRecipes.Remove(cloned);
+                            break;
+                        }
+                    }
+
+                    RecipeManager.recipes = newRecipes;
+                    RecipeManager.recipes.Add(cloned);
+
+                    recipeToBuild = cloned;
+
+                    RecipeTabControl.TabPages.Remove(page.getTabPage());
                 }
             }
 
@@ -422,7 +534,9 @@ namespace RecipeOrganizer
                 recipePage.getEditButton().Click += editButton_Click;
                 recipePage.getDoneButton().Click += doneButton_Click;
                 recipePage.getExitButton().Click += exitButton_Click;
-                recipePage.getAddIngredientButton().Click += addButton_Click;
+                recipePage.getDeleteButton().Click += deleteButton_Click;
+                recipePage.getAddIngredientButton().Click += addIngredientsButton_Click;
+                recipePage.getAddInstructionButton().Click += addInstructionsButton_Click;
 
                 RecipeTabControl.SelectedTab = newTabPage;
             }
@@ -502,6 +616,5 @@ namespace RecipeOrganizer
             dialog.FilterIndex = 1;
             dialog.ShowDialog();
         }
-
     }
 }

@@ -20,8 +20,12 @@ namespace RecipeOrganizer
         private Button editButton;
         private Button doneButton;
         private Button exitButton;
+        private Button deleteButton;
         private Button addIngredientButton;
+        private Button addInstructionButton;
         private List<TextBox> editableIngredients = new List<TextBox>();
+        private List<TextBox> editableInstructions = new List<TextBox>();
+        private TextBox prepTimeBox;
         private Panel pagePanel;
         private TabPage tabPage;
         private bool pageInEditing;
@@ -31,7 +35,7 @@ namespace RecipeOrganizer
 
         }
 
-        public RecipePage(Recipe associatedRecipe, PictureBox bookmark, Label title, Label tags, PictureBox imagePreview, Label imageBackground, List<TextBox> boxes, Button button, Panel panel)
+        public RecipePage(Recipe associatedRecipe, PictureBox bookmark, Label title, Label tags, PictureBox imagePreview, Label imageBackground, List<TextBox> boxes, List<TextBox> instructionBoxes, Button button, Panel panel)
         {
             recipe = associatedRecipe;
             bookmarkPicture = bookmark;
@@ -41,6 +45,7 @@ namespace RecipeOrganizer
             recipeImagePreviewBackground = imageBackground;
             editButton = button;
             editableIngredients = boxes;
+            editableInstructions = instructionBoxes;
             pagePanel = panel;
 
             pageInEditing = false;
@@ -80,6 +85,11 @@ namespace RecipeOrganizer
             return editableIngredients; 
         }
 
+        public List<TextBox> getEditableInstructionsTextBoxes()
+        {
+            return editableInstructions;
+        }
+
         public Button getEditButton()
         {
             return editButton;
@@ -93,6 +103,16 @@ namespace RecipeOrganizer
         public Button getDoneButton()
         {
             return doneButton;
+        }
+
+        public void setDeleteButton(Button button)
+        {
+            deleteButton = button;
+        }
+
+        public Button getDeleteButton()
+        {
+            return deleteButton;
         }
 
         public void setExitButton(Button button)
@@ -115,6 +135,16 @@ namespace RecipeOrganizer
             return tabPage;
         }
 
+        public void setPrepTimeBox(TextBox prep)
+        {
+            prepTimeBox = prep;
+        }
+
+        public TextBox getPrepTimeBox()
+        {
+            return prepTimeBox;
+        }
+
         public void setAddIngredientButton(Button button)
         {
             addIngredientButton = button;
@@ -123,6 +153,16 @@ namespace RecipeOrganizer
         public Button getAddIngredientButton()
         {
             return addIngredientButton;
+        }
+
+        public void setAddInstructionButton(Button button)
+        {
+            addInstructionButton = button;
+        }
+
+        public Button getAddInstructionButton()
+        {
+            return addInstructionButton;
         }
 
         public void setPageInEditing(bool editing)

@@ -98,7 +98,7 @@ namespace RecipeOrganizer
             page.Controls.Add(recipePagePanel);
 
             Panel newPanel = new Panel();
-            newPanel.Size = new Size(590, 900);
+            newPanel.Size = new Size(590, 2000);
 
             recipePagePanel.Controls.Add(newPanel);
 
@@ -132,17 +132,39 @@ namespace RecipeOrganizer
                 newPanel.Controls.Add(box);
             }
 
-            Button add = addIngredientButton(recipe);
-            newPanel.Controls.Add(add);
+            Button addIngredient = addIngredientButton(recipe);
+            newPanel.Controls.Add(addIngredient);
 
-            add.Visible = false;
+            newPanel.Controls.Add(prepTimeLabel(recipe));
+
+            TextBox editableDate = placeDateTimePicker(recipe);
+            newPanel.Controls.Add(editableDate);
+            newPanel.Controls.Add(instructionsLabel(recipe));
+
+            List<TextBox> instructionsBoxes = buildInteractableInstructions(recipe);
+
+            foreach (TextBox box in instructionsBoxes)
+            {
+                newPanel.Controls.Add(box);
+            }
+
+            Button addInstruction = addIngredientButton(recipe);
+            newPanel.Controls.Add(addInstruction);
+
+            RecipePage recipePage = new RecipePage(recipe, bookmarkLabel, title, tags, pictureBox, pictureBackground, ingredientsBoxes, instructionsBoxes, edit, newPanel);
+            recipePage.setDoneButton(done);
+            recipePage.setDeleteButton(delete);
+            recipePage.setExitButton(exit);
+            recipePage.setAddIngredientButton(addIngredient);
+            recipePage.setAddInstructionButton(addInstruction);
+            recipePage.setTabPage(page);
+            recipePage.setPrepTimeBox(editableDate);
+
+            addIngredient.Visible = false;
+            addInstruction.Visible = false;
             done.Visible = false;
 
-            RecipePage recipePage = new RecipePage(recipe, bookmarkLabel, title, tags, pictureBox, pictureBackground, ingredientsBoxes, edit, newPanel);
-            recipePage.setDoneButton(done);
-            recipePage.setExitButton(exit);
-            recipePage.setAddIngredientButton(add);
-            recipePage.setTabPage(page);
+            newPanel.Size = new Size(590, 330 + pageUIAdditive);
 
             RecipeManager.pages.Add(recipePage);
 
@@ -253,6 +275,7 @@ namespace RecipeOrganizer
             addButton.Location = new Point(15, (330 + pageUIAdditive));
             addButton.Size = new Size(23, 23);
             addButton.UseVisualStyleBackColor = true;
+            pageUIAdditive += 30;
 
             return addButton;
         }
@@ -306,6 +329,19 @@ namespace RecipeOrganizer
             return interactables;
         }
 
+        private static List<TextBox> buildInteractableInstructions(Recipe recipe)
+        {
+            List<TextBox> interactables = new List<TextBox>();
+
+            foreach (String instruction in recipe.getInstructions())
+            {
+                interactables.Add(placeInteractableInstruction(recipe, instruction, pageUIAdditive));
+                pageUIAdditive += 30;
+            }
+
+            return interactables;
+        }
+
         private static TextBox placeInteractableIngredient(Recipe recipe, String ingredient, int additive)
         {
             TextBox box = new TextBox();
@@ -318,6 +354,61 @@ namespace RecipeOrganizer
             box.Text = ingredient;
 
             return box;
+        }
+
+        private static TextBox placeInteractableInstruction(Recipe recipe, String instruction, int additive)
+        {
+            TextBox box = new TextBox();
+            box.Location = new Point(16, (330 + additive));
+            box.Size = new Size(300, 60);
+            box.BackColor = SystemColors.ActiveCaption;
+            box.BorderStyle = BorderStyle.None;
+            box.ReadOnly = true;
+            box.Enabled = false;
+            box.Text = instruction;
+
+            return box;
+        }
+
+        private static Label prepTimeLabel(Recipe recipe)
+        {
+
+            Label label = new Label();
+            label.Text = "Prep-Time";
+            label.Font = new Font("Microsoft Sans Serif", 15);
+            label.Size = new Size(400, 30);
+            label.Location = new Point(12, 330 + pageUIAdditive);
+
+            pageUIAdditive += 40;
+
+            return label;
+        }
+
+        private static TextBox placeDateTimePicker(Recipe recipe)
+        {
+            TextBox box = new TextBox();
+            box.Location = new Point(16, (330 + pageUIAdditive));
+            box.ReadOnly = true;
+            box.Enabled = false;
+            box.Text = recipe.getPrepTime();
+
+            pageUIAdditive += 60;
+
+            return box;
+        }
+
+        private static Label instructionsLabel(Recipe recipe)
+        {
+
+            Label label = new Label();
+            label.Text = "Instructions";
+            label.Font = new Font("Microsoft Sans Serif", 15);
+            label.Size = new Size(400, 30);
+            label.Location = new Point(12, 330 + pageUIAdditive);
+
+            pageUIAdditive += 40;
+
+            return label;
         }
     }
 }
