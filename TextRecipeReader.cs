@@ -42,11 +42,19 @@ namespace RecipeOrganizer
                         writer.WriteLine("# Prep Time");
                         writer.WriteLine(recipe.getPrepTime());
                         writer.WriteLine("");
+                        writer.WriteLine("# Tags");
+
+                        foreach (String tag in recipe.getTags())
+                        {
+                            writer.WriteLine("," + tag);
+                        }
+
+                        writer.WriteLine("");
                         writer.WriteLine("# Ingredients");
 
-                        foreach (String ingredients in recipe.getIngredients())
+                        foreach (String ingredient in recipe.getIngredients())
                         {
-                            writer.WriteLine("- " + ingredients);
+                            writer.WriteLine("." + ingredient);
                         }
 
                         writer.WriteLine("");
@@ -54,7 +62,7 @@ namespace RecipeOrganizer
 
                         foreach (String instruction in recipe.getInstructions())
                         {
-                            writer.WriteLine("- " + instruction);
+                            writer.WriteLine("-" + instruction);
                         }
 
                         writer.WriteLine("");
@@ -62,21 +70,143 @@ namespace RecipeOrganizer
                         writer.WriteLine(recipe.getImage());
 
                         writer.Dispose();
+
+                        DialogResult informDelete = MessageBox.Show("Successfully exported recipe " + "\"" + recipe.getName() + "\"" + ".", "Exported Recipe", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
         }
 
-            public static void importRecipeFromFile()
+        public static Recipe importRecipeFromFile()
         {
-            string path = @"C:\";
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Select Recipe File";
+            dialog.InitialDirectory = @"C:\";
+            dialog.Filter = "Text File (*.txt)|*.txt";
+            dialog.FilterIndex = 1;
 
-            File.Create(path).Dispose();
+            DialogResult result = dialog.ShowDialog();
 
-            using (TextWriter tw = new StreamWriter(path))
+            Recipe builtRecipe = new Recipe();
+
+            if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(dialog.FileName))
             {
-                tw.WriteLine("The very first line!");
+
+                String line;
+                try
+                {
+                    int i = 1;
+                    StreamReader reader = new StreamReader(dialog.FileName);
+                    line = reader.ReadLine();
+
+                    //Line 1 is always the name
+                    line = line.Remove(0, 2);
+
+                    if (!recipeAlreadyExists(line))
+                    {
+                        builtRecipe.setName(line);
+
+                        line = skipLines(line, reader, 3);
+
+                        //Line 3 is always prep time
+                        builtRecipe.setPrepTime(line);
+
+                        //Skip to next known info
+                        line = skipLines(line, reader, 3);
+
+                        //Get all ingredients from the format we made on export
+                        List<String> tags = new List<String>();
+
+                        while (line.Contains(","))
+                        {
+                            line = line.Remove(0, 1);
+                            tags.Add(line);
+                            line = reader.ReadLine();
+                        }
+
+                        //Skip to next known info
+                        line = skipLines(line, reader, 3);
+
+                        //Get all ingredients from the format we made on export
+                        List<String> ingredients = new List<String>();
+
+                        while (line.Contains("."))
+                        {
+                            line = line.Remove(0, 1);
+                            ingredients.Add(line);
+                            line = reader.ReadLine();
+                        }
+
+                        //Skip to next known info
+                        line = skipLines(line, reader, 3);
+
+                        //Get all instructions from the format we made on export
+                        List<String> instructions = new List<String>();
+
+                        while (line.Contains("-"))
+                        {
+                            line = line.Remove(0, 1);
+                            instructions.Add(line);
+                            line = reader.ReadLine();
+                        }
+
+                        //Skip to next known info
+                        line = skipLines(line, reader, 2);
+
+                        String url = "";
+
+                        //Build the url off the remaining lines since nothing should follow after
+                        while (line != null)
+                        {
+                            url += line;
+                            line = reader.ReadLine();
+                        }
+
+                        //Set the instructions, ingredient, and url of the recipe off the information we just got
+                        builtRecipe.setTags(tags);
+                        builtRecipe.setIngredients(ingredients);
+                        builtRecipe.setInstructions(instructions);
+                        builtRecipe.setImage(url);
+
+                        reader.Close();
+                    } else
+                    {
+                        DialogResult imformError = MessageBox.Show("Error importing recipe: " + "Recipe already exists.", "Invalid Recipe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        reader.Close();
+
+                        return null;
+                    }
+                }
+                catch (Exception e)
+                {
+                    DialogResult imformError = MessageBox.Show("Error importing recipe: " + e.Message, "Invalid Recipe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
+
+            return builtRecipe;
+        }
+
+        private static String skipLines(String line, StreamReader reader, int skip)
+        {
+            for (int i = 0; i < skip; i++)
+            {
+                line = reader.ReadLine();
+            }
+
+            return line;
+        }
+
+        private static bool recipeAlreadyExists(String name)
+        {
+            foreach (Recipe recipe in RecipeManager.recipes)
+            {
+                if (recipe.getName().Equals(name))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

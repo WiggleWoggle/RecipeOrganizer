@@ -59,18 +59,12 @@ namespace RecipeOrganizer
 
         public void setName(String name)
         {
-
             recipeName = name;
         }
 
-        public void addInstruction(int index, String instruction)
+        public String getInstruction(int index)
         {
-
-        }
-
-        public String getInstruction(int index, String instruction)
-        {
-            return " ";
+            return instructions[index];
         }
 
         public void setInstruction(int index, String instruction)
@@ -78,14 +72,9 @@ namespace RecipeOrganizer
             instructions[index] = instruction;
         }
 
-        public void addIngredient(int index, String ingredient)
+        public String getIngredient(int index)
         {
-
-        }
-
-        public String getIngredient(int index, String ingredient)
-        {
-            return " ";
+            return ingredients[index];
         }
 
         public List<String> getIngredients()
@@ -170,16 +159,6 @@ namespace RecipeOrganizer
             return bookmarked;
         }
 
-        public void importRecipe()
-        {
-
-        }
-
-        public void exportRecipe()
-        {
-
-        }
-
         public String getName()
         {
             return recipeName;
@@ -187,13 +166,11 @@ namespace RecipeOrganizer
 
         public void addRecipeTag(String tag)
         {
-
             recipeTags.Add(tag);
         }
 
         public void removeTag(String tag)
         {
-
             if (recipeTags.Contains(tag))
             {
                 recipeTags.Remove(tag);
@@ -202,8 +179,12 @@ namespace RecipeOrganizer
 
         public List<String> getTags()
         {
-
             return recipeTags;
+        }
+
+        public void setTags(List<String> tags)
+        {
+            recipeTags = tags;
         }
 
         public void setSyncedPanel(Panel panel)

@@ -179,14 +179,11 @@ namespace RecipeOrganizer
         //Recipe Display
         private void updateDisplayedRecipes(String textboxString)
         {
-
             List<Recipe> temp = new List<Recipe>();
-
             displayedRecipes.Clear();
 
             foreach (Recipe recipe in RecipeManager.recipes)
             {
-
                 String recipeName = recipe.getName();
                 if (recipeName.IndexOf(textboxString, 0, StringComparison.OrdinalIgnoreCase) != -1)
                 {
@@ -199,7 +196,6 @@ namespace RecipeOrganizer
                     {
                         if (tagName.IndexOf(textboxString, 0, StringComparison.OrdinalIgnoreCase) != -1)
                         {
-
                             displayedRecipes.Add(recipe);
                             break;
                         }
@@ -235,6 +231,7 @@ namespace RecipeOrganizer
             }
         }
 
+        //Recipe Page Bookmark Button Functionality
         private void bookmark_Toggle_Click(object sender, EventArgs e)
         {
             PictureBox control = sender as PictureBox;
@@ -260,6 +257,7 @@ namespace RecipeOrganizer
             }
         }
 
+        //Recipe Page Done Button Functionality
         private void doneButton_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
@@ -330,6 +328,7 @@ namespace RecipeOrganizer
             }
         }
 
+        //Recipe Page Edit Button Functionality
         private void editButton_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
@@ -373,6 +372,7 @@ namespace RecipeOrganizer
             }
         }
 
+        //Recipe Page Exit Button Functionality
         private void exitButton_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
@@ -399,6 +399,7 @@ namespace RecipeOrganizer
             RecipeManager.pages = temp;
         }
 
+        //Export Button Functionality
         private void exportButton_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
@@ -411,7 +412,6 @@ namespace RecipeOrganizer
                 {
                     if (page.getPageInEditing() == false)
                     {
-                        page.getRecipe().exportRecipe();
                         TextRecipeReader.exportRecipeToFile(page.getRecipe());
                     }
                     else
@@ -424,6 +424,20 @@ namespace RecipeOrganizer
             }
         }
 
+        //Import Recipe
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            Recipe builtRecipe = TextRecipeReader.importRecipeFromFile();
+
+            if (builtRecipe != null)
+            {
+                DialogResult informDelete = MessageBox.Show("Successfully imported recipe " + "\"" + builtRecipe.getName() + "\"" + ".", "Imported Recipe", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                RecipeManager.addRecipe(builtRecipe);
+            }
+        }
+
+
+        //Delete Button Functionality
         private void deleteButton_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
@@ -448,6 +462,8 @@ namespace RecipeOrganizer
                             RecipeLayoutPanel.Controls.Clear();
                             updateDisplayedRecipes("");
                             displayRecipes();
+
+                            DialogResult informDelete = MessageBox.Show("Successfully deleted recipe " + "\"" + page.getRecipe().getName() + "\"" + ".", "Deleted Recipe", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     } else
                     {
@@ -631,16 +647,6 @@ namespace RecipeOrganizer
             {
                 System.Diagnostics.Debug.WriteLine("An error occurred: " + ex.Message);
             }
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Title = "Select Recipe File";
-            dialog.InitialDirectory = @"C:\";
-            dialog.Filter = "Text File (*.txt)|*.txt";
-            dialog.FilterIndex = 1;
-            dialog.ShowDialog();
         }
     }
 }
