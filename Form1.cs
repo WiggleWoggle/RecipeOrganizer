@@ -40,7 +40,6 @@ namespace RecipeOrganizer
             {
 
                 displayCount++;
-
                 buildRecipe(recipe);
             }
 
@@ -83,17 +82,15 @@ namespace RecipeOrganizer
             RecipeLayoutPanel.Controls.Add(createPanel(recipe));
 
             createPanel(recipe);
-
-            //updateNoBookmarkLabel();
         }
 
         //Search Bar Functionality
-
         private void SearchInputText_TextChanged(object sender, EventArgs e)
         {
 
         }
-
+        
+        //Search Bar Functionality
         private void searchButton_Click(object sender, EventArgs e)
         {
 
@@ -113,6 +110,7 @@ namespace RecipeOrganizer
             }
         }
 
+        //Reset
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -126,6 +124,7 @@ namespace RecipeOrganizer
             displayRecipes();
         }
 
+        //Refresh Button
         private void refreshButton_Click(object sender, EventArgs e)
         {
             displayedRecipes.Clear();
@@ -134,6 +133,7 @@ namespace RecipeOrganizer
             displayRecipes();
         }
 
+        //Toggling Search Mode For Visibility
         private void searchMode(bool searchMode)
         {
             if (searchMode)
@@ -160,12 +160,17 @@ namespace RecipeOrganizer
             }
         }
 
+        //If Recipe Exists Method
         private bool foundRecipe(Panel panel)
         {
             foreach (Recipe recipe in displayedRecipes)
             {
                 if (recipe.getSyncedPanel().Name.Equals(panel.Name))
                 {
+                    if (RecipeTabControl.TabPages.Count > 6)
+                    {
+                        RecipeTabControl.TabPages.Remove(RecipeTabControl.TabPages[1]);
+                    }
 
                     createRecipeTab(recipe);
 
@@ -204,7 +209,7 @@ namespace RecipeOrganizer
             }
         }
 
-        //Click Handler
+        //Click Handlers
         private void recipe_Click(object sender, EventArgs e)
         {
             Panel panel = sender as Panel;
@@ -215,6 +220,7 @@ namespace RecipeOrganizer
             }
         }
 
+        //Exit Button
         private void control_Click(object sender, EventArgs e)
         {
             Control control = sender as Control;
@@ -267,63 +273,7 @@ namespace RecipeOrganizer
                 if (page.getDoneButton().Equals(button))
                 {
 
-                    button.Visible = false;
-
-                    Recipe cloned = page.getRecipe();
-                    List<Recipe> newRecipes = RecipeManager.recipes;
-
-                    foreach (Recipe recipe in RecipeManager.recipes)
-                    {
-                        if (recipe.Equals(cloned))
-                        {
-                            newRecipes.Remove(cloned);
-                            break;
-                        }
-                    }
-
-                    RecipeManager.recipes = newRecipes;
-
-                    cloned.getIngredients().Clear();
-
-                    List<String> newIngredients = new List<String>();
-                    List<String> newInstructions = new List<String>();
-
-                    foreach (TextBox ingredientBox in page.getEditableIngredientsTextBoxes())
-                    {
-                        ingredientBox.BackColor = SystemColors.ActiveCaption;
-                        ingredientBox.BorderStyle = BorderStyle.None;
-                        ingredientBox.ReadOnly = true;
-                        ingredientBox.Enabled = false;
-
-                        newIngredients.Add(ingredientBox.Text);
-                    }
-
-                    foreach (TextBox instructionBox in page.getEditableInstructionsTextBoxes())
-                    {
-                        instructionBox.BackColor = SystemColors.ActiveCaption;
-                        instructionBox.BorderStyle = BorderStyle.None;
-                        instructionBox.ReadOnly = true;
-                        instructionBox.Enabled = false;
-
-                        newInstructions.Add(instructionBox.Text);
-                    }
-
-                    page.getPrepTimeBox().ReadOnly = true;
-                    page.getPrepTimeBox().Enabled = false;
-
-                    cloned.setPrepTime(page.getPrepTimeBox().Text);
-                    cloned.setIngredients(newIngredients);
-                    cloned.setInstructions(newInstructions);
-
-                    RecipeManager.recipes.Add(cloned);
-
-                    page.setPageInEditing(false);
-
-                    page.getAddIngredientButton().Visible = false;
-                    page.getAddInstructionButton().Visible = false;
-                    page.getEditButton().Visible = true;
-
-                    page.getTabPage().Text = cloned.getName();
+                    RecipeTabEditor.setPageInViewMode(page);
                 }
             }
         }
@@ -338,36 +288,7 @@ namespace RecipeOrganizer
                 if (page.getEditButton().Equals(button))
                 {
 
-                    button.Visible = false;
-
-                    foreach (TextBox ingredientBox in page.getEditableIngredientsTextBoxes())
-                    {
-                        ingredientBox.BackColor = Color.White;
-                        ingredientBox.BorderStyle = BorderStyle.Fixed3D;
-                        ingredientBox.ReadOnly = false;
-                        ingredientBox.Enabled = true;
-                    }
-
-                    foreach (TextBox instructionBox in page.getEditableInstructionsTextBoxes())
-                    {
-                        instructionBox.BackColor = Color.White;
-                        instructionBox.BorderStyle = BorderStyle.Fixed3D;
-                        instructionBox.ReadOnly = false;
-                        instructionBox.Enabled = true;
-                    }
-
-                    page.getPrepTimeBox().BackColor = Color.White;
-                    page.getPrepTimeBox().BorderStyle = BorderStyle.Fixed3D;
-                    page.getPrepTimeBox().ReadOnly = false;
-                    page.getPrepTimeBox().Enabled = true;
-
-                    page.setPageInEditing(true);
-
-                    page.getAddIngredientButton().Visible = true;
-                    page.getAddInstructionButton().Visible = true;
-                    page.getDoneButton().Visible = true;
-
-                    page.getTabPage().Text = page.getRecipe().getName() + " (Editing)";
+                    RecipeTabEditor.setPageInEditMode(page);
                 }
             }
         }
@@ -436,7 +357,6 @@ namespace RecipeOrganizer
             }
         }
 
-
         //Delete Button Functionality
         private void deleteButton_Click(object sender, EventArgs e)
         {
@@ -477,6 +397,7 @@ namespace RecipeOrganizer
             RecipeManager.pages = temp;
         }
 
+        //Add Ingredients
         private void addIngredientsButton_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
@@ -514,10 +435,14 @@ namespace RecipeOrganizer
 
             if (recipeToBuild != null)
             {
-                createRecipeTab(recipeToBuild);
+
+                RecipeTabEditor.setPageInEditMode(createRecipeTab(recipeToBuild));
+
+                
             }
         }
 
+        //Add Instructions
         private void addInstructionsButton_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
@@ -555,11 +480,12 @@ namespace RecipeOrganizer
 
             if (recipeToBuild != null)
             {
-                createRecipeTab(recipeToBuild);
+                RecipeTabEditor.setPageInEditMode(createRecipeTab(recipeToBuild));
             }
         }
 
-        private void createRecipeTab(Recipe recipe)
+        //Initialize Recipe Tab
+        private RecipePage createRecipeTab(Recipe recipe)
         {
             TabPage newTabPage = new TabPage(recipe.getName());
 
@@ -581,9 +507,14 @@ namespace RecipeOrganizer
                 recipePage.getAddInstructionButton().Click += addInstructionsButton_Click;
 
                 RecipeTabControl.SelectedTab = newTabPage;
+
+                return recipePage;
             }
+
+            return null;
         }
 
+        //Check If Recipe Already Open
         private bool recipeAlreadyOpenInAnotherTab(TabPage newTab)
         {
 
@@ -602,7 +533,6 @@ namespace RecipeOrganizer
         }
 
         //UI Recipe Updating/Creation
-
         private Panel createPanel(Recipe recipe)
         {
 
@@ -622,16 +552,14 @@ namespace RecipeOrganizer
         }
 
         //SQL Server Methods
-
         private void SQLserver()
         {
-            string connectionString = @"Server=(localdb)\MSSQLLocalDB;Integrated Security=true";
 
             string createDbQuery = "CREATE DATABASE recipies";
 
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(RecipeManager.connectionString))
                 {
                     conn.Open();
 

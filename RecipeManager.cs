@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace RecipeOrganizer
 {
     internal class RecipeManager
     {
+        public static String connectionString = @"Server=(localdb)\MSSQLLocalDB;Integrated Security=true";
 
         public static List<Recipe> recipes = new List<Recipe>();
 

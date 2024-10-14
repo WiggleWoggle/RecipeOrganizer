@@ -13,6 +13,7 @@ namespace RecipeOrganizer
         public static void exportRecipeToFile(Recipe recipe)
         {
 
+            //Have the user select a file directory
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             DialogResult result = dialog.ShowDialog();
 
@@ -20,6 +21,7 @@ namespace RecipeOrganizer
             {
                 String directory = dialog.SelectedPath;
 
+                //Have the user save the file to the location
                 SaveFileDialog saveDialog = new SaveFileDialog();
                 saveDialog.InitialDirectory = directory;
                 saveDialog.Filter = "Text File (*.txt)|*.txt";
@@ -33,45 +35,48 @@ namespace RecipeOrganizer
                     directory = directory + "/" + recipe.getName() + ".txt";
 
                     using (var file = File.Open(directory, FileMode.OpenOrCreate))
-                    using (var writer = new StreamWriter(file))
                     {
-
-                        //Formatting the file
-                        writer.WriteLine("# " + recipe.getName());
-                        writer.WriteLine("");
-                        writer.WriteLine("# Prep Time");
-                        writer.WriteLine(recipe.getPrepTime());
-                        writer.WriteLine("");
-                        writer.WriteLine("# Tags");
-
-                        foreach (String tag in recipe.getTags())
+                        using (var writer = new StreamWriter(file))
                         {
-                            writer.WriteLine("," + tag);
+
+                            //Formatting the file
+                            writer.WriteLine("# " + recipe.getName());
+                            writer.WriteLine("");
+                            writer.WriteLine("# Prep Time");
+                            writer.WriteLine(recipe.getPrepTime());
+                            writer.WriteLine("");
+                            writer.WriteLine("# Tags");
+
+                            foreach (String tag in recipe.getTags())
+                            {
+                                writer.WriteLine("," + tag);
+                            }
+
+                            writer.WriteLine("");
+                            writer.WriteLine("# Ingredients");
+
+                            foreach (String ingredient in recipe.getIngredients())
+                            {
+                                writer.WriteLine("." + ingredient);
+                            }
+
+                            writer.WriteLine("");
+                            writer.WriteLine("# Instructions");
+
+                            foreach (String instruction in recipe.getInstructions())
+                            {
+                                writer.WriteLine("-" + instruction);
+                            }
+
+                            writer.WriteLine("");
+                            writer.WriteLine("# Image URL");
+                            writer.WriteLine(recipe.getImage());
+
+                            writer.Dispose();
+
+                            //Success box
+                            DialogResult informDelete = MessageBox.Show("Successfully exported recipe " + "\"" + recipe.getName() + "\"" + ".", "Exported Recipe", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
-
-                        writer.WriteLine("");
-                        writer.WriteLine("# Ingredients");
-
-                        foreach (String ingredient in recipe.getIngredients())
-                        {
-                            writer.WriteLine("." + ingredient);
-                        }
-
-                        writer.WriteLine("");
-                        writer.WriteLine("# Instructions");
-
-                        foreach (String instruction in recipe.getInstructions())
-                        {
-                            writer.WriteLine("-" + instruction);
-                        }
-
-                        writer.WriteLine("");
-                        writer.WriteLine("# Image URL");
-                        writer.WriteLine(recipe.getImage());
-
-                        writer.Dispose();
-
-                        DialogResult informDelete = MessageBox.Show("Successfully exported recipe " + "\"" + recipe.getName() + "\"" + ".", "Exported Recipe", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
@@ -79,6 +84,7 @@ namespace RecipeOrganizer
 
         public static Recipe importRecipeFromFile()
         {
+            //Have the user select the file
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Select Recipe File";
             dialog.InitialDirectory = @"C:\";
@@ -91,11 +97,11 @@ namespace RecipeOrganizer
 
             if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(dialog.FileName))
             {
-
+                //Initialize line to read from
                 String line;
                 try
                 {
-                    int i = 1;
+                    //Initialize streamreader and move to line 1
                     StreamReader reader = new StreamReader(dialog.FileName);
                     line = reader.ReadLine();
 
