@@ -31,6 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
             this.Home = new System.Windows.Forms.TabPage();
+            this.importButton = new System.Windows.Forms.Button();
+            this.refreshButton = new System.Windows.Forms.Button();
+            this.returnToHomeButton = new System.Windows.Forms.Button();
             this.searchButton = new System.Windows.Forms.Button();
             this.NoResultsLabel = new System.Windows.Forms.Label();
             this.NoBookmarksLabel = new System.Windows.Forms.Label();
@@ -38,6 +41,7 @@
             this.ResultsLabel = new System.Windows.Forms.Label();
             this.SearchInputText = new System.Windows.Forms.TextBox();
             this.RecipeTabControl = new System.Windows.Forms.TabControl();
+            this.button2 = new System.Windows.Forms.Button();
             this.Home.SuspendLayout();
             this.RecipeTabControl.SuspendLayout();
             this.SuspendLayout();
@@ -52,6 +56,9 @@
             // Home
             // 
             this.Home.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Home.Controls.Add(this.importButton);
+            this.Home.Controls.Add(this.refreshButton);
+            this.Home.Controls.Add(this.returnToHomeButton);
             this.Home.Controls.Add(this.searchButton);
             this.Home.Controls.Add(this.NoResultsLabel);
             this.Home.Controls.Add(this.NoBookmarksLabel);
@@ -63,7 +70,38 @@
             this.Home.Padding = new System.Windows.Forms.Padding(3);
             this.Home.Size = new System.Drawing.Size(617, 662);
             this.Home.TabIndex = 1;
-            this.Home.Text = "Home";
+            this.Home.Text = "Home (Bookmarks)";
+            // 
+            // importButton
+            // 
+            this.importButton.Location = new System.Drawing.Point(594, 45);
+            this.importButton.Name = "importButton";
+            this.importButton.Size = new System.Drawing.Size(23, 23);
+            this.importButton.TabIndex = 15;
+            this.importButton.Text = "↓";
+            this.importButton.UseVisualStyleBackColor = true;
+            this.importButton.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // refreshButton
+            // 
+            this.refreshButton.Location = new System.Drawing.Point(594, 19);
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(23, 23);
+            this.refreshButton.TabIndex = 14;
+            this.refreshButton.Text = "↻";
+            this.refreshButton.UseVisualStyleBackColor = true;
+            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
+            // 
+            // returnToHomeButton
+            // 
+            this.returnToHomeButton.Location = new System.Drawing.Point(594, 19);
+            this.returnToHomeButton.Name = "returnToHomeButton";
+            this.returnToHomeButton.Size = new System.Drawing.Size(23, 23);
+            this.returnToHomeButton.TabIndex = 13;
+            this.returnToHomeButton.Text = "←";
+            this.returnToHomeButton.UseVisualStyleBackColor = true;
+            this.returnToHomeButton.Visible = false;
+            this.returnToHomeButton.Click += new System.EventHandler(this.button1_Click);
             // 
             // searchButton
             // 
@@ -73,7 +111,7 @@
             this.searchButton.Size = new System.Drawing.Size(58, 23);
             this.searchButton.TabIndex = 12;
             this.searchButton.Text = "Search";
-            this.searchButton.UseVisualStyleBackColor = false;
+            this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // NoResultsLabel
@@ -84,6 +122,7 @@
             this.NoResultsLabel.Size = new System.Drawing.Size(57, 13);
             this.NoResultsLabel.TabIndex = 11;
             this.NoResultsLabel.Text = "No results.";
+            this.NoResultsLabel.Visible = false;
             // 
             // NoBookmarksLabel
             // 
@@ -110,6 +149,7 @@
             this.ResultsLabel.Size = new System.Drawing.Size(45, 13);
             this.ResultsLabel.TabIndex = 7;
             this.ResultsLabel.Text = "Results:";
+            this.ResultsLabel.Visible = false;
             // 
             // SearchInputText
             // 
@@ -117,7 +157,6 @@
             this.SearchInputText.Name = "SearchInputText";
             this.SearchInputText.Size = new System.Drawing.Size(450, 20);
             this.SearchInputText.TabIndex = 5;
-            this.SearchInputText.Text = "...";
             this.SearchInputText.TextChanged += new System.EventHandler(this.SearchInputText_TextChanged);
             // 
             // RecipeTabControl
@@ -130,12 +169,22 @@
             this.RecipeTabControl.Size = new System.Drawing.Size(625, 688);
             this.RecipeTabControl.TabIndex = 3;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(639, 127);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 5;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSlateGray;
             this.ClientSize = new System.Drawing.Size(642, 686);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.hScrollBar1);
             this.Controls.Add(this.RecipeTabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -159,6 +208,10 @@
         private System.Windows.Forms.Label NoBookmarksLabel;
         private System.Windows.Forms.Label NoResultsLabel;
         private System.Windows.Forms.Button searchButton;
+        private System.Windows.Forms.Button returnToHomeButton;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button refreshButton;
+        private System.Windows.Forms.Button importButton;
     }
 }
 

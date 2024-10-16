@@ -14,10 +14,10 @@ namespace RecipeOrganizer
         private int recipeID;
         private String recipeName;
         private String image;
-        private DateTime prepTime;
+        private String prepTime;
         private String cuisine;
         private String season;
-        private Boolean bookmarked = false;
+        private bool bookmarked = false;
         private List<String> instructions = new List<String>();
         private List<String> ingredients = new List<String>();
         private List<String> recipeTags = new List<String>();
@@ -28,7 +28,7 @@ namespace RecipeOrganizer
 
         }
 
-        public Recipe(int recipeID, String recipeName, String image, DateTime prepTime, String cuisine, String season, List<String> instructions, List<String> ingredients, List<String> recipeTags)
+        public Recipe(int recipeID, String recipeName, String image, String prepTime, String cuisine, String season, List<String> instructions, List<String> ingredients, List<String> recipeTags)
         {
             setRecipeID(recipeID);
             setName(recipeName);
@@ -59,18 +59,12 @@ namespace RecipeOrganizer
 
         public void setName(String name)
         {
-
             recipeName = name;
         }
 
-        public void addInstruction(int index, String instruction)
+        public String getInstruction(int index)
         {
-
-        }
-
-        public String getInstruction(int index, String instruction)
-        {
-            return " ";
+            return instructions[index];
         }
 
         public void setInstruction(int index, String instruction)
@@ -78,14 +72,24 @@ namespace RecipeOrganizer
             instructions[index] = instruction;
         }
 
-        public void addIngredient(int index, String ingredient)
+        public String getIngredient(int index)
         {
-
+            return ingredients[index];
         }
 
-        public String getIngredient(int index, String ingredient)
+        public List<String> getIngredients()
         {
-            return " ";
+            return ingredients;
+        }
+
+        public List<String> getInstructions()
+        {
+            return instructions;
+        }
+
+        public void setInstructions(List<String> newInstructions)
+        {
+            instructions = newInstructions;
         }
 
         public void setIngredient(int index, String ingredient)
@@ -93,12 +97,17 @@ namespace RecipeOrganizer
             ingredients[index] = ingredient;
         }
 
-        public void setPrepTime(DateTime time)
+        public void setIngredients(List<String> newIngredients)
+        {
+            ingredients = newIngredients;   
+        }
+
+        public void setPrepTime(String time)
         {
             prepTime = time;
         }
 
-        public DateTime getPrepTime()
+        public String getPrepTime()
         {
             return prepTime;
         }
@@ -150,16 +159,6 @@ namespace RecipeOrganizer
             return bookmarked;
         }
 
-        public void importRecipe()
-        {
-
-        }
-
-        public void exportRecipe()
-        {
-
-        }
-
         public String getName()
         {
             return recipeName;
@@ -167,13 +166,11 @@ namespace RecipeOrganizer
 
         public void addRecipeTag(String tag)
         {
-
             recipeTags.Add(tag);
         }
 
         public void removeTag(String tag)
         {
-
             if (recipeTags.Contains(tag))
             {
                 recipeTags.Remove(tag);
@@ -182,8 +179,12 @@ namespace RecipeOrganizer
 
         public List<String> getTags()
         {
-
             return recipeTags;
+        }
+
+        public void setTags(List<String> tags)
+        {
+            recipeTags = tags;
         }
 
         public void setSyncedPanel(Panel panel)
