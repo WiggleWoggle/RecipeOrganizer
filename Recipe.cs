@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Google.Protobuf.WellKnownTypes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,17 +12,17 @@ namespace RecipeOrganizer
 
     internal class Recipe
     {
-        private int recipeID;
-        private String recipeName;
-        private String image;
-        private String prepTime;
-        private String cuisine;
-        private String season;
-        private bool bookmarked = false;
-        private List<String> instructions = new List<String>();
-        private List<String> ingredients = new List<String>();
-        private List<String> recipeTags = new List<String>();
-        private Panel syncedRecipePanel;
+        public int recipeID;
+        public String recipeName;
+        public String image;
+        public String prepTime;
+        public String cuisine;
+        public String season;
+        public bool bookmarked = false;
+        public List<String> instructions = new List<String>();
+        public List<String> ingredients = new List<String>();
+        public List<String> recipeTags = new List<String>();
+        public Panel syncedRecipePanel;
 
         public Recipe()
         {
@@ -99,7 +100,7 @@ namespace RecipeOrganizer
 
         public void setIngredients(List<String> newIngredients)
         {
-            ingredients = newIngredients;   
+            ingredients = newIngredients;
         }
 
         public void setPrepTime(String time)
@@ -189,12 +190,84 @@ namespace RecipeOrganizer
 
         public void setSyncedPanel(Panel panel)
         {
-            syncedRecipePanel = panel; 
+            syncedRecipePanel = panel;
         }
 
         public Panel getSyncedPanel()
         {
-            return syncedRecipePanel; 
+            return syncedRecipePanel;
+        }
+
+    }
+
+    internal class RecipeBuilder
+    {
+
+        private Recipe recipe = new Recipe();
+
+        public RecipeBuilder addRecipeID(int id)
+        {
+            recipe.recipeID = id;
+            return this;
+        }
+
+        public RecipeBuilder addRecipeName(String value)
+        {
+            recipe.recipeName = value;
+            return this;
+        }
+
+        public RecipeBuilder addImage(String value)
+        {
+            recipe.image = value;
+            return this;
+        }
+
+        public RecipeBuilder addPrepTime(String value)
+        {
+            recipe.prepTime = value;
+            return this;
+        }
+
+        public RecipeBuilder addCuisine(String value)
+        {
+            recipe.cuisine = value;
+            return this;
+        }
+
+        public RecipeBuilder addSeason(String season)
+        {
+            recipe.season = season;
+            return this;
+        }
+
+        public RecipeBuilder addBookmarked(bool value)
+        {
+            recipe.bookmarked = value;
+            return this;
+        }
+
+        public RecipeBuilder addInstructions(List<String> value)
+        {
+            recipe.instructions = value;
+            return this;
+        }
+
+        public RecipeBuilder addIngredients(List<String> value)
+        {
+            recipe.ingredients = value;
+            return this;
+        }
+
+        public RecipeBuilder addTags(List<String> value)
+        {
+            recipe.recipeTags = value;
+            return this;
+        }
+
+        public Recipe Build()
+        {
+            return recipe;
         }
     }
 }

@@ -4,7 +4,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,13 +21,18 @@ namespace RecipeOrganizer
         public Form1()
         {
 
-            RecipeManager.initRecipes();
-
             InitializeComponent();
 
             this.MaximumSize = new System.Drawing.Size(640, 729);
             this.MinimumSize = this.MaximumSize;
             this.CenterToScreen();
+
+            TextRecipeReader.getOrCreateDirectoryStoredFile();
+
+            if (TextRecipeReader.hasCachedRecipeDirectory()) 
+            {
+                TextRecipeReader.importRecipesOnLaunch(RecipeManager.onLoadDirectory);
+            } 
 
             SQLserver();
         }
@@ -131,6 +138,7 @@ namespace RecipeOrganizer
             RecipeLayoutPanel.Controls.Clear();
             resetDisplayedToBookmarked();
             displayRecipes();
+            sortAlphabetically();
         }
 
         //Toggling Search Mode For Visibility
@@ -146,6 +154,7 @@ namespace RecipeOrganizer
                 refreshButton.Visible = false;
                 TabPage page = RecipeTabControl.TabPages[0];
                 page.Text = "Home (Search)";
+                sortAlphabetically();
             } else
             {
                 SearchInputText.Text = "";
@@ -157,6 +166,7 @@ namespace RecipeOrganizer
                 refreshButton.Visible = true;
                 TabPage page = RecipeTabControl.TabPages[0];
                 page.Text = "Home (Bookmarks)";
+                sortAlphabetically();
             }
         }
 
@@ -192,7 +202,6 @@ namespace RecipeOrganizer
                 String recipeName = recipe.getName();
                 if (recipeName.IndexOf(textboxString, 0, StringComparison.OrdinalIgnoreCase) != -1)
                 {
-
                     displayedRecipes.Add(recipe);
                 }
                 else
@@ -209,11 +218,18 @@ namespace RecipeOrganizer
             }
         }
 
+        private void sortAlphabetically()
+        {
+            RecipeManager.recipes = RecipeManager.recipes
+            .OrderBy(recipe => recipe.getName(), StringComparer.OrdinalIgnoreCase)
+            .ToList();
+        }
+
         //Click Handlers
         private void recipe_Click(object sender, EventArgs e)
         {
             Panel panel = sender as Panel;
-
+            
             if (!foundRecipe(panel))
             {
                 RecipeLayoutPanel.Controls.Remove(panel);
@@ -352,8 +368,10 @@ namespace RecipeOrganizer
 
             if (builtRecipe != null)
             {
-                DialogResult informDelete = MessageBox.Show("Successfully imported recipe " + "\"" + builtRecipe.getName() + "\"" + ".", "Imported Recipe", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult informImport = MessageBox.Show("Successfully imported recipe " + "\"" + builtRecipe.getName() + "\"" + ".", "Imported Recipe", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 RecipeManager.addRecipe(builtRecipe);
+
+                sortAlphabetically();
             }
         }
 
@@ -384,6 +402,8 @@ namespace RecipeOrganizer
                             displayRecipes();
 
                             DialogResult informDelete = MessageBox.Show("Successfully deleted recipe " + "\"" + page.getRecipe().getName() + "\"" + ".", "Deleted Recipe", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            sortAlphabetically();
                         }
                     } else
                     {
