@@ -27,12 +27,7 @@ namespace RecipeOrganizer
             this.MinimumSize = this.MaximumSize;
             this.CenterToScreen();
 
-            TextRecipeReader.getOrCreateDirectoryStoredFile();
-
-            if (TextRecipeReader.hasCachedRecipeDirectory()) 
-            {
-                TextRecipeReader.importRecipesOnLaunch(RecipeManager.onLoadDirectory);
-            } 
+            RecipeManager.initRecipes();
 
             SQLserver();
         }
