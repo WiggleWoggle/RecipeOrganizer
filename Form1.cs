@@ -38,12 +38,11 @@ namespace RecipeOrganizer
 
             int displayCount = 0;
 
-            foreach (Recipe recipe in displayedRecipes)
+            displayedRecipes.ToList().ForEach(recipe =>
             {
-
                 displayCount++;
                 buildRecipe(recipe);
-            }
+            });
 
             NoResultsLabel.Text = displayCount.ToString() + " Results";
         }

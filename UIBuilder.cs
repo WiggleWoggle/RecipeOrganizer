@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -179,9 +180,14 @@ namespace RecipeOrganizer
 
             PictureBox image = new PictureBox();
 
-            //unsafe image call, needs to be fixed later
-            image.ImageLocation = recipe.getImage();
-            //
+            try
+            {
+                image.ImageLocation = recipe.getImage();
+            } catch (Exception e)
+            {
+                DialogResult error = MessageBox.Show("File not found: " + e, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
             image.SizeMode = PictureBoxSizeMode.StretchImage;
             image.Location = new Point(20, 82);
             image.Size = new Size(200, 200);
@@ -207,11 +213,24 @@ namespace RecipeOrganizer
 
             if (recipe.isBookmarked())
             {
-                image.Image = Resources.bookmark_icon;
+                try
+                {
+                    image.Image = Resources.bookmark_icon;
+                } catch (FileNotFoundException e)
+                {
+                    DialogResult error = MessageBox.Show("Bookmark picture not found: " + e, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             else
             {
-                image.Image = Resources.bookmarkiconempty;
+                try
+                {
+                    image.Image = Resources.bookmarkiconempty;
+                }
+                catch (FileNotFoundException e)
+                {
+                    DialogResult error = MessageBox.Show("Bookmark picture not found: " + e, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
 
             image.Name = recipe.getName() + "toggleableBookmark";
